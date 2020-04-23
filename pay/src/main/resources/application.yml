@@ -1,0 +1,21 @@
+server:
+  port: 9997
+spring:
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/, classpath:/public/
+
+
+#微信账户信息
+wx-appid: wxa6560b9ee6f159f8
+wx-mchId: 1519674311
+wx-mchKey: WiyljQfnywrLICEvx644gcvsrA5GrdfX
+wx-cret-addr: classpath:cert/1519674311.p12
+wx-pem-addr: classpath:cert/pulick2.pem
+
+#拉卡拉扫码账户信息
+lkl-code-shopNo: 822126090640003
+lkl-code-termId: 47781282
+
+
+
+

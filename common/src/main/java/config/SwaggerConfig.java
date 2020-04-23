@@ -1,6 +1,5 @@
 package config;
 
-import com.google.common.base.Predicates;
 import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

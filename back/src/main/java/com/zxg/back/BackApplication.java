@@ -7,7 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication(
         scanBasePackages={
-                "mapper","com.zxg.back"
+                "mapper","com.zxg.back","util","config"
         }
 )
 @MapperScan(basePackages = "mapper")
@@ -17,5 +17,4 @@ public class BackApplication  {
     public static void main(String[] args) {
         SpringApplication.run(BackApplication.class, args);
     }
-
 }

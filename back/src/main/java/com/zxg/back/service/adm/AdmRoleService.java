@@ -11,4 +11,11 @@ public interface AdmRoleService {
      * @return
      */
     List<AdmRole> selectByUserId(Integer userId);
+
+    /**
+     * 角色ID查询角色列表
+     * @param roleIds 角色ID集合
+     * @return
+     */
+    List<AdmRole> selectByRoleIds(List<Integer> roleIds);
 }

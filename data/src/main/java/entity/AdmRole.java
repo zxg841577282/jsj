@@ -1,9 +1,12 @@
 package entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+
+import java.util.List;
 
 /**
  * @Author: zhou_xg
@@ -11,7 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @Purpose:
  */
 @Data
-public class AdmRole implements GrantedAuthority {
+public class AdmRole  {
     @TableId
     private Integer id;
 
@@ -19,9 +22,8 @@ public class AdmRole implements GrantedAuthority {
 
     private Boolean isAdmin;//是否管理员
 
-    @JsonIgnore
-    @Override
-    public String getAuthority() {
-        return roleName;
-    }
+    @TableField(exist = false)
+    private List<AdmMenu> menuList;
+
+
 }

@@ -16,4 +16,6 @@ public class AdmMenu {
     private String name;
 
     private String url;
+
+    private String code;
 }

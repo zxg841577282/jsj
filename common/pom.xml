@@ -10,4 +10,16 @@
     </parent>
     <artifactId>common</artifactId>
     <name>common</name>
+
+    <properties>
+        <httpcore.version>4.4.13</httpcore.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>${httpcore.version}</version>
+        </dependency>
+    </dependencies>
 </project>
