@@ -21,6 +21,7 @@
         <module>back</module>
         <module>get_logistics</module>
         <module>pay</module>
+        <module>office</module>
     </modules>
 
     <properties>

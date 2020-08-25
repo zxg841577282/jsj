@@ -444,12 +444,12 @@ public class ExcelToHtmlUtil {
 			sb.append("</style>");
 			sb.append("</head><body style=\"overflow:hidden;\">");
 			// 加载动画
-//			sb.append("<div id=\"loading\"><div id=\"loading-center\"><div id=\"loading-center-absolute\"><div class=\"object\" id=\"object_one\"></div><div class=\"object\" id=\"object_two\"></div><div class=\"object\" id=\"object_three\"></div><div class=\"object\" id=\"object_four\"></div></div></div></div>");
+			sb.append("<div id=\"loading\"><div id=\"loading-center\"><div id=\"loading-center-absolute\"><div class=\"object\" id=\"object_one\"></div><div class=\"object\" id=\"object_two\"></div><div class=\"object\" id=\"object_three\"></div><div class=\"object\" id=\"object_four\"></div></div></div></div>");
 			// 内容
 			sb.append(getExcelInfo(file));
 			// js
-			sb.append("<script src=\"https://code.jquery.com/jquery-3.4.1.min.js\" ></script>");
-			sb.append("<script src=\"js/excel.js\" charset=\"utf-8\"></script>");
+			sb.append("<script src=\"/js/jquery-3.4.1.min.js\" ></script>");
+			sb.append("<script src=\"/js/excel.js\" charset=\"utf-8\"></script>");
 			sb.append("</body></html>");
 		} catch (IOException e) {
 			e.printStackTrace();
