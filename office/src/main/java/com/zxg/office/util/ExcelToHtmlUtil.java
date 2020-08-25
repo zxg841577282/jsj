@@ -25,119 +25,7 @@ import static org.apache.poi.ss.usermodel.BorderStyle.NONE;
  */
 public class ExcelToHtmlUtil {
 
-	/**
-	 * 获取Excel信息
-	 * @return
-	 */
-	private static String getExcelInfo(File file) throws IOException {
-		StringBuilder sb = new StringBuilder();
 
-		FileInputStream inputStream = new FileInputStream(file);
-
-		Workbook wb;
-
-		String name = file.getName();
-		String suffix = name.substring(name.lastIndexOf("."));
-		if(suffix.equals(".xls")){
-			wb = new HSSFWorkbook(inputStream);
-		}else {
-			wb = new XSSFWorkbook(inputStream);
-		}
-
-		Sheet sheet = wb.getSheetAt(0);//获取第一个Sheet的内容
-		int lastRowNum = sheet.getLastRowNum();
-		Map<String, String> map[] = getRowSpanColSpanMap(sheet);
-
-		List<Short> colNumList = new ArrayList<Short>();
-		Row row0 = null;
-		for (int rowNum = sheet.getFirstRowNum(); rowNum <= lastRowNum; rowNum++) {
-			row0 = sheet.getRow(rowNum);
-			if (row0 == null) {
-				continue;
-			}
-			colNumList.add(row0.getLastCellNum());
-		}
-		// 最大列数
-		int maxColNum = Collections.max(colNumList)-1;
-
-		sb.append("<table id=\"overflow\" style=\"border-collapse:collapse;\">");
-		sb.append("<thead>");
-		sb.append("<tr>");
-		for (int i = -1; i <= maxColNum; i++) {
-			sb.append("<th>");
-			if (i == -1) {
-				sb.append("&nbsp;");
-				continue;
-			}
-			if (i < 26) {
-				sb.append((char)(65 + i));
-			} else {
-				sb.append("" + (char)(65 + i/26 - 1) + (char)(65 + i%26));
-			}
-			sb.append("</th>");
-		}
-		sb.append("</tr>");
-		sb.append("</thead>");
-		sb.append("<tbody>");
-		Row row = null;
-		Cell cell = null;
-		for (int rowNum = sheet.getFirstRowNum(); rowNum <= lastRowNum; rowNum++) {
-			row = sheet.getRow(rowNum);
-			if (row == null) {
-				sb.append("<tr>");
-				sb.append("<td class=\"num\" style=\"border: 1px solid #D4D4D4;\">"+ (rowNum+1) +"</td>");
-				for (int j = 0; j <= maxColNum; j++) {
-					sb.append("<td style=\"border: 1px solid #D4D4D4;\"><nobr>&nbsp;</nobr></td>");
-				}
-				sb.append("</tr>");
-				continue;
-			}
-			sb.append("<tr>");
-			sb.append("<td class=\"num\" style=\"border: 1px solid #D4D4D4;\">"+ (rowNum+1) +"</td>");
-			for (int colNum = 0; colNum <= maxColNum; colNum++) {
-				cell = row.getCell(colNum);
-				if (cell == null) {    //特殊情况 空白的单元格会返回null
-					sb.append("<td style=\"border: 1px solid #D4D4D4;\"><nobr>&nbsp;</nobr></td>");
-					continue;
-				}
-				String stringValue = getCellValue(cell);
-				if (map[0].containsKey(rowNum + "," + colNum)) {
-					String pointString = map[0].get(rowNum + "," + colNum);
-					map[0].remove(rowNum + "," + colNum);
-					int bottomeRow = Integer.valueOf(pointString.split(",")[0]);
-					int bottomeCol = Integer.valueOf(pointString.split(",")[1]);
-					int rowSpan = bottomeRow - rowNum + 1;
-					int colSpan = bottomeCol - colNum + 1;
-					sb.append("<td rowspan= '" + rowSpan + "' colspan= '"+ colSpan + "' ");
-				} else if (map[1].containsKey(rowNum + "," + colNum)) {
-					map[1].remove(rowNum + "," + colNum);
-					continue;
-				} else {
-					sb.append("<td ");
-				}
-
-				//需要样式
-				if(suffix.equals(".xls")){
-					dealHSSExcelStyle(wb, sheet, cell, sb);//处理单元格样式
-				}else {
-					dealXSSExcelStyle(wb, sheet, cell, sb);//处理单元格样式
-				}
-
-				sb.append("><nobr>");
-				if (stringValue == null || "".equals(stringValue.trim())) {
-					sb.append("&nbsp;");
-				} else {
-					// 将ascii码为160的空格转换为html下的空格（ ）
-					sb.append(stringValue.replace(String.valueOf((char) 160),"&nbsp;"));
-				}
-				sb.append("</nobr></td>");
-			}
-			sb.append("</tr>");
-		}
-		sb.append("</tbody>");
-		sb.append("</table>");
-		return sb.toString();
-	}
 
 	/**
 	 * 获取所有合并单元格的范围单元格和过程单元格
@@ -233,9 +121,7 @@ public class ExcelToHtmlUtil {
 	}
 
 	/**
-	 * 处理表格样式
-	 * @param sheet
-	 * @param sb
+	 * XSS xlxs 处理表格样式
 	 */
 	private static void dealXSSExcelStyle(Workbook wb, Sheet sheet, Cell cell, StringBuilder sb){
 		CellStyle cellStyle = cell.getCellStyle();
@@ -260,15 +146,18 @@ public class ExcelToHtmlUtil {
 			} else {
 				sb.append("background-color:#FFFFFF;"); // 背景颜色
 			}
-			sb.append(getBorderStyle("border-top:" ,cellStyle.getBorderTop(), ((XSSFCellStyle) cellStyle).getTopBorderXSSFColor()));
-			sb.append(getBorderStyle("border-right:",cellStyle.getBorderRight(), ((XSSFCellStyle) cellStyle).getRightBorderXSSFColor()));
-			sb.append(getBorderStyle("border-bottom:",cellStyle.getBorderBottom(), ((XSSFCellStyle) cellStyle).getBottomBorderXSSFColor()));
-			sb.append(getBorderStyle("border-left:",cellStyle.getBorderLeft(), ((XSSFCellStyle) cellStyle).getLeftBorderXSSFColor()));
+			sb.append(getXSSBorderStyle("border-top:" ,cellStyle.getBorderTop(), ((XSSFCellStyle) cellStyle).getTopBorderXSSFColor()));
+			sb.append(getXSSBorderStyle("border-right:",cellStyle.getBorderRight(), ((XSSFCellStyle) cellStyle).getRightBorderXSSFColor()));
+			sb.append(getXSSBorderStyle("border-bottom:",cellStyle.getBorderBottom(), ((XSSFCellStyle) cellStyle).getBottomBorderXSSFColor()));
+			sb.append(getXSSBorderStyle("border-left:",cellStyle.getBorderLeft(), ((XSSFCellStyle) cellStyle).getLeftBorderXSSFColor()));
 
 			sb.append("\" ");
 		}
 	}
 
+	/**
+	 * HSS xls 处理表格样式
+	 */
 	private static void dealHSSExcelStyle(Workbook wb, Sheet sheet, Cell cell, StringBuilder sb){
 		HSSFWorkbook hw = (HSSFWorkbook) wb;
 
@@ -359,7 +248,10 @@ public class ExcelToHtmlUtil {
 		return valign;
 	}
 
-	private static  String getBorderStyle(String borderDirection, BorderStyle borderStyle, XSSFColor xc){
+	/**
+	 * XSS xlxs 格式 边框样式
+	 */
+	private static  String getXSSBorderStyle(String borderDirection, BorderStyle borderStyle, XSSFColor xc){
 		String result = borderDirection;
 		if (borderStyle == NONE) {
 			result += "1px solid #D4D4D4;";
@@ -392,6 +284,9 @@ public class ExcelToHtmlUtil {
 		return result;
 	}
 
+	/**
+	 * HSS xls 格式 边框样式
+	 */
 	private static  String getHSSBorderStyle(String borderDirection, BorderStyle borderStyle, HSSFColor xc){
 		String result = borderDirection;
 		if (borderStyle == NONE) {
@@ -454,6 +349,120 @@ public class ExcelToHtmlUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return sb.toString();
+	}
+
+	/**
+	 * 获取Excel信息
+	 * @return
+	 */
+	private static String getExcelInfo(File file) throws IOException {
+		StringBuilder sb = new StringBuilder();
+
+		FileInputStream inputStream = new FileInputStream(file);
+
+		Workbook wb;
+
+		String name = file.getName();
+		String suffix = name.substring(name.lastIndexOf("."));
+		if(suffix.equals(".xls")){
+			wb = new HSSFWorkbook(inputStream);
+		}else {
+			wb = new XSSFWorkbook(inputStream);
+		}
+
+		Sheet sheet = wb.getSheetAt(0);//获取第一个Sheet的内容
+		int lastRowNum = sheet.getLastRowNum();
+		Map<String, String> map[] = getRowSpanColSpanMap(sheet);
+
+		List<Short> colNumList = new ArrayList<Short>();
+		Row row0 = null;
+		for (int rowNum = sheet.getFirstRowNum(); rowNum <= lastRowNum; rowNum++) {
+			row0 = sheet.getRow(rowNum);
+			if (row0 == null) {
+				continue;
+			}
+			colNumList.add(row0.getLastCellNum());
+		}
+		// 最大列数
+		int maxColNum = Collections.max(colNumList)-1;
+
+		sb.append("<table id=\"overflow\" style=\"border-collapse:collapse;\">");
+		sb.append("<thead>");
+		sb.append("<tr>");
+		for (int i = -1; i <= maxColNum; i++) {
+			sb.append("<th>");
+			if (i == -1) {
+				sb.append("&nbsp;");
+				continue;
+			}
+			if (i < 26) {
+				sb.append((char)(65 + i));
+			} else {
+				sb.append("" + (char)(65 + i/26 - 1) + (char)(65 + i%26));
+			}
+			sb.append("</th>");
+		}
+		sb.append("</tr>");
+		sb.append("</thead>");
+		sb.append("<tbody>");
+		Row row = null;
+		Cell cell = null;
+		for (int rowNum = sheet.getFirstRowNum(); rowNum <= lastRowNum; rowNum++) {
+			row = sheet.getRow(rowNum);
+			if (row == null) {
+				sb.append("<tr>");
+				sb.append("<td class=\"num\" style=\"border: 1px solid #D4D4D4;\">"+ (rowNum+1) +"</td>");
+				for (int j = 0; j <= maxColNum; j++) {
+					sb.append("<td style=\"border: 1px solid #D4D4D4;\"><nobr>&nbsp;</nobr></td>");
+				}
+				sb.append("</tr>");
+				continue;
+			}
+			sb.append("<tr>");
+			sb.append("<td class=\"num\" style=\"border: 1px solid #D4D4D4;\">"+ (rowNum+1) +"</td>");
+			for (int colNum = 0; colNum <= maxColNum; colNum++) {
+				cell = row.getCell(colNum);
+				if (cell == null) {    //特殊情况 空白的单元格会返回null
+					sb.append("<td style=\"border: 1px solid #D4D4D4;\"><nobr>&nbsp;</nobr></td>");
+					continue;
+				}
+				String stringValue = getCellValue(cell);
+				if (map[0].containsKey(rowNum + "," + colNum)) {
+					String pointString = map[0].get(rowNum + "," + colNum);
+					map[0].remove(rowNum + "," + colNum);
+					int bottomeRow = Integer.parseInt(pointString.split(",")[0]);
+					int bottomeCol = Integer.parseInt(pointString.split(",")[1]);
+					int rowSpan = bottomeRow - rowNum + 1;
+					int colSpan = bottomeCol - colNum + 1;
+					sb.append("<td rowspan= '" + rowSpan + "' colspan= '"+ colSpan + "' ");
+				} else if (map[1].containsKey(rowNum + "," + colNum)) {
+					map[1].remove(rowNum + "," + colNum);
+					continue;
+				} else {
+					sb.append("<td ");
+				}
+
+				//需要样式
+				if(suffix.equals(".xls")){
+					dealHSSExcelStyle(wb, sheet, cell, sb);//处理单元格样式
+				}else {
+					dealXSSExcelStyle(wb, sheet, cell, sb);//处理单元格样式
+				}
+
+				sb.append("><nobr>");
+				if (stringValue == null || "".equals(stringValue.trim())) {
+					sb.append("&nbsp;");
+				} else {
+					// 将ascii码为160的空格转换为html下的空格（ ）
+					sb.append(stringValue.replace(String.valueOf((char) 160),"&nbsp;"));
+				}
+				sb.append("</nobr></td>");
+			}
+			sb.append("</tr>");
+		}
+		sb.append("</tbody>");
+		sb.append("</table>");
 		return sb.toString();
 	}
 }
