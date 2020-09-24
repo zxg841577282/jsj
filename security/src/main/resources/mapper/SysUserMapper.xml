@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxg.security.data.mapper.SysUserDao">
+
+    <select id="getPageList" resultType="com.zxg.security.data.vo.SysUserPageResp">
+        select su.id,su.name
+        from sys_user su
+        where 1=1
+        <if test="req.account != null and req.account!=''">
+            and su.account like concat('%',#{req.account},'%')
+        </if>
+        <if test="req.name != null and req.name!=''">
+            and su.name like concat('%',#{req.name},'%')
+        </if>
+        <if test="req.status != null and req.status!=''">
+            and su.status = #{req.status}
+        </if>
+    </select>
+</mapper>

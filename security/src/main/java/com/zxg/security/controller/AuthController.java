@@ -2,6 +2,7 @@ package com.zxg.security.controller;
 
 import com.zxg.security.data.dto.UpdateLoginPwdDTO;
 import com.zxg.security.data.entity.SysUser;
+import com.zxg.security.data.service.SysRoleService;
 import com.zxg.security.data.service.SysUserService;
 import com.zxg.security.data.vo.AdminLoginUserResp;
 import io.swagger.annotations.Api;
@@ -14,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import other.R;
 
+import java.util.ArrayList;
+
 
 @RestController
 @Log4j2
@@ -22,6 +25,7 @@ import other.R;
 @Api(tags = "登陆用户管理")
 public class AuthController {
     private final SysUserService sysUserService;
+    private final SysRoleService sysRoleService;
 
     @GetMapping("/getLoginUserInfo")
     @ApiOperation(value = "获取当前登陆用户信息")
@@ -53,6 +57,27 @@ public class AuthController {
         }
 
         return R.error("原密码不正确");
+    }
+
+    @GetMapping("/getMyPermission")
+    @ApiOperation(value = "查询可用权限")
+    public R getMyPermission() {
+
+        //获取当前登陆账户信息
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        //匿名用户没有权限
+        if ("anonymousUser".equals(authentication.getPrincipal())){
+            return R.error("匿名账户暂无权限");
+        }
+
+        if (authentication.getPrincipal() instanceof AdminLoginUserResp) {
+            AdminLoginUserResp sysUser = (AdminLoginUserResp)authentication.getPrincipal();
+
+            return R.ok(sysRoleService.getPerList(sysUser.getRoleId()));
+        }
+
+        return R.ok(new ArrayList<>());
     }
 
 }

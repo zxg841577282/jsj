@@ -16,6 +16,7 @@ import java.util.List;
  * 使用自定义投票器MyAccessVoter进行判断当前登陆账户是否有相应等权限
  */
 
+
 @EnableGlobalMethodSecurity(prePostEnabled = true)      //开启PreAuthorize注解权限判断
 public class MyMethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 

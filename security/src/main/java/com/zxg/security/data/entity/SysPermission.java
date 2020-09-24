@@ -1,11 +1,15 @@
 package com.zxg.security.data.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,26 +29,26 @@ public class SysPermission extends Model<SysPermission> {
 
     private Long faId;
 
-    public SysPermission(String value,Integer type,String name) {
+    @TableField(exist = false)
+    private List<SysPermission> sonList;
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public enum PermissionType{
+        catalog("目录",0),
+        menu("菜单",1),
+        button("按钮",2),
+        ;
+
+        private String desc;
+        private Integer code;
+    }
+
+    public SysPermission(String value, String name, Long faId,Integer type) {
         this.name = name;
         this.value = value;
         this.type = type;
-    }
-
-    public SysPermission(String value, String name, Long faId) {
-        this.name = name;
-        this.value = value;
-
-        int aaa = 0;
-        String a = value.split("_")[0];
-        if (a.equals("but")){
-            aaa = 2;
-        }
-        if (a.equals("menu")){
-            aaa = 1;
-        }
-
-        this.type = aaa;
         this.faId = faId;
     }
 

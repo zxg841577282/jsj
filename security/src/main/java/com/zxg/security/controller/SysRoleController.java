@@ -9,15 +9,12 @@ import com.zxg.security.data.entity.SysRole;
 import com.zxg.security.data.entity.SysRolePermission;
 import com.zxg.security.data.entity.SysUser;
 import com.zxg.security.data.service.SysRoleService;
-import com.zxg.security.data.vo.AdminLoginUserResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import other.Group;
 import other.R;
@@ -38,19 +35,6 @@ public class SysRoleController {
     @PreAuthorize("hasAuthority('menu_sysrole_list')")
     public R getPageList(@RequestBody SysRolePageReq req) {
         return R.ok(sysRoleService.getPageList(req));
-    }
-
-    @GetMapping("/getMyPermission")
-    @ApiOperation(value = "查询可用权限")
-    @PreAuthorize("hasAuthority('but_menu_sysrole_list_read')")
-    public R getMyPermission() {
-
-        //获取当前登陆账户信息
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        AdminLoginUserResp sysUser = (AdminLoginUserResp)authentication.getPrincipal();
-
-        return R.ok(sysRoleService.getPerList(sysUser.getRoleId()));
     }
 
     @GetMapping("/getModel/{id}")
@@ -96,7 +80,19 @@ public class SysRoleController {
         return R.error("请选择对象");
     }
 
+    @PostMapping("/getTestPage")
+    @ApiOperation(value = "测试菜单")
+    @PreAuthorize("hasAuthority('menu_test_list')")
+    public R getPageList() {
+        return R.ok();
+    }
 
+    @PostMapping("/getTestBut")
+    @ApiOperation(value = "测试按钮")
+    @PreAuthorize("hasAuthority('but_menu_test_list_add')")
+    public R getTestBut() {
+        return R.ok();
+    }
 
 
 }

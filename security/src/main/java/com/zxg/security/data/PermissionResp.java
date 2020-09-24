@@ -19,20 +19,24 @@ public class PermissionResp implements GrantedAuthority {
 
     private String value;
 
+    private Integer type;//类型 0目录  1菜单  2按钮
+
     @JsonIgnore
     private String className;
 
     private List<PermissionResp> sonList;
 
-    public PermissionResp(String name, String value) {
+    public PermissionResp(String name, String value,Integer type) {
         this.name = name;
         this.value = value;
+        this.type = type;
         this.sonList = new ArrayList<>();
     }
 
     public PermissionResp(String name, String value, String className) {
         this.name = name.replace("[","").replace("]","");
         this.value = value;
+        this.type = 0;
         this.className = className;
         this.sonList = new ArrayList<>();
     }

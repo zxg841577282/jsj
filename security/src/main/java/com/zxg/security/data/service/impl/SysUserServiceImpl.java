@@ -178,12 +178,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
                 String menuName = preAuthorize.value().replace("hasAuthority('", "").replace("')", "");
 
 
-                resp = new PermissionResp(ApiOperation.value(),menuName);
+                resp = new PermissionResp(ApiOperation.value(),menuName,1);
 
                 List<PermissionResp> butList = new ArrayList<>();
 
                 //查询出按钮权限
-                List<PreAuthorize> buttonList = collect.stream().filter(p -> p.value().contains(menuName)).collect(Collectors.toList());
+                Set<PreAuthorize> buttonList = collect.stream().filter(p -> p.value().contains(menuName)).collect(Collectors.toSet());
                 PermissionResp permissionResp;
                 if (CollectionUtil.isNotEmpty(buttonList)){
                     for (PreAuthorize authorize : buttonList) {
@@ -194,7 +194,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
                             io.swagger.annotations.ApiOperation ApiOperation2 = method2.getAnnotation(io.swagger.annotations.ApiOperation.class);
 
                             String butName = authorize.value().replace("hasAuthority('", "").replace("')", "");
-                            permissionResp = new PermissionResp(ApiOperation2.value(),butName);
+                            permissionResp = new PermissionResp(ApiOperation2.value(),butName,2);
                             butList.add(permissionResp);
                         }
                     }
@@ -262,7 +262,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
         getNowValueList.removeAll(dbCatalogValueList);
         if (ObjectUtil.isNotEmpty(getNowValueList)){
             //递归新增
-            sysPermissionService.recursionAdd(getNowValueList,faList,0l);
+            sysPermissionService.recursionAdd(getNowValueList,faList, 0L);
         }
     }
 

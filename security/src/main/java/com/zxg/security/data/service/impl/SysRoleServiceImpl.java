@@ -1,5 +1,6 @@
 package com.zxg.security.data.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -132,8 +133,8 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public List<SysPermission> getPerList(Long roleId) {
-        if (roleId.equals(0l)){
-            return new SysPermission().selectAll();
+        if (roleId.equals(0L)){
+            return test(new SysPermission().selectAll());
         }
 
         List<SysRolePermission> sysRolePermissions = new SysRolePermission().selectList(new LambdaQueryWrapper<SysRolePermission>().eq(SysRolePermission::getRoleId, roleId));
@@ -142,7 +143,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
             List<Long> myPerList = sysRolePermissions.stream().map(SysRolePermission::getPermissionId).collect(Collectors.toList());
 
-            return new SysPermission().selectList(new LambdaQueryWrapper<SysPermission>().in(SysPermission::getId,myPerList));
+            return test(new SysPermission().selectList(new LambdaQueryWrapper<SysPermission>().in(SysPermission::getId,myPerList)));
         }
         return new ArrayList<>();
     }
@@ -151,5 +152,35 @@ public class SysRoleServiceImpl implements SysRoleService {
         SysRole sysRole = new SysRole().selectOne(new LambdaQueryWrapper<SysRole>().eq(SysRole::getName, name));
         if (ObjectUtil.isNotEmpty(sysRole)){ throw new ResultException("存在相同角色名"); }
         return sysRole;
+    }
+
+    private List<SysPermission> test(List<SysPermission> all){
+        if (CollectionUtil.isEmpty(all)){
+            return new ArrayList<>();
+        }
+
+        //目录
+        List<SysPermission> catalogList = all.stream().filter(p -> p.getType().equals(SysPermission.PermissionType.catalog.getCode())).collect(Collectors.toList());
+        if (CollectionUtil.isEmpty(catalogList)){
+            return new ArrayList<>();
+        }
+        List<SysPermission> menuList;
+        List<SysPermission> butList;
+        for (SysPermission catalog : catalogList) {
+            //菜单
+            menuList = all.stream().filter(p -> p.getFaId().equals(catalog.getId())).collect(Collectors.toList());
+            if (CollectionUtil.isNotEmpty(menuList)){
+                for (SysPermission menu : menuList) {
+                    //按钮
+                    butList = all.stream().filter(p -> p.getFaId().equals(menu.getId())).collect(Collectors.toList());
+                    if (CollectionUtil.isNotEmpty(butList)){
+                        menu.setSonList(butList);
+                    }
+                }
+                catalog.setSonList(menuList);
+            }
+        }
+
+        return catalogList;
     }
 }

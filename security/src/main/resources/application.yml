@@ -2,7 +2,8 @@ server:
   port: 7777
 
 spring:
-
+  security:
+    state: true
   profiles:
     active: dev
 
@@ -36,8 +37,7 @@ spring:
 
 # mybatis
 mybatis-plus:
-  mapper-locations: classpath*:/com/lql/**/*Mapper.xml
-  typeAliasesPackage: com.lql.**.entity
+  mapper-locations: classpath:/mapper/*Mapper.xml
   global-config:
     # 关闭MP3.0自带的banner
     banner: false

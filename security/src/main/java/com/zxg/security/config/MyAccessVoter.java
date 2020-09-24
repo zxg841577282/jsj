@@ -2,6 +2,7 @@ package com.zxg.security.config;
 
 import com.alibaba.fastjson.JSONObject;
 import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.prepost.PreInvocationAttribute;
@@ -43,9 +44,14 @@ public class MyAccessVoter implements AccessDecisionVoter<MethodInvocation> {
      * @param collection
      * @return
      */
+    @Value(value = "${spring.security.state}")
+    private boolean securityState;
 
     @Override
     public int vote(Authentication authentication, MethodInvocation method, Collection<ConfigAttribute> collection) {
+        if (!securityState){
+            return 1;
+        }
 
         // 没有权限默认拒绝
         if (authentication == null){

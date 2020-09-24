@@ -76,9 +76,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessHandler(myLogoutSuccessHandler)
                     .permitAll()
 
-                    .and()
-                    .exceptionHandling() // 异常处理设置
-                    .authenticationEntryPoint(new MyAuthExceptionEntryPoint())
+//                    .and()
+//                    .exceptionHandling() // 异常处理设置
+//                    .authenticationEntryPoint(new MyAuthExceptionEntryPoint())
 
                     .and()
                     .sessionManagement()    //设置session管理器

@@ -46,13 +46,13 @@ public class SysPermissionServiceImpl implements SysPermissionService {
                 if (ObjectUtil.isNotEmpty(sonList)){
                     PermissionResp resp2;
                     for (SysPermission permission : sonList) {
-                        resp2 = new PermissionResp(permission.getName(),permission.getValue());
+                        resp2 = new PermissionResp(permission.getName(),permission.getValue(),permission.getType());
 
                         List<SysPermission> butList = oldList.stream().filter(p -> p.getFaId().equals(permission.getId())).collect(Collectors.toList());
                         if (ObjectUtil.isNotEmpty(butList)){
                             PermissionResp resp3;
                             for (SysPermission but : butList) {
-                                resp3 = new PermissionResp(but.getName(),but.getValue());
+                                resp3 = new PermissionResp(but.getName(),but.getValue(),but.getType());
                                 resp2.getSonList().add(resp3);
                             }
                         }
@@ -101,7 +101,7 @@ public class SysPermissionServiceImpl implements SysPermissionService {
         if (CollectionUtil.isNotEmpty(collect)){
 
             for (PermissionResp permissionResp : collect) {
-                SysPermission sysPermission = new SysPermission(permissionResp.getValue(), permissionResp.getName(),faId);
+                SysPermission sysPermission = new SysPermission(permissionResp.getValue(), permissionResp.getName(),faId,permissionResp.getType());
                 sysPermission.insert();
 
                 List<PermissionResp> menuList = permissionResp.getSonList();
