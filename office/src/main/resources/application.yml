@@ -1,0 +1,6 @@
+uploadPath: F:/uploads/
+server:
+  port: 8000
+spring:
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/, classpath:/public/
