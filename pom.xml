@@ -18,7 +18,6 @@
     <modules>
         <module>data</module>
         <module>common</module>
-        <module>back</module>
         <module>get_logistics</module>
         <module>pay</module>
         <module>security</module>
