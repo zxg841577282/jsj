@@ -11,8 +11,8 @@ import java.security.MessageDigest;
 public class SignUtil {
 
     public static String getSha1(String str) {
-        char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                'a', 'b', 'c', 'd', 'e', 'f' };
+        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'a', 'b', 'c', 'd', 'e', 'f'};
         try {
             MessageDigest mdTemp = MessageDigest.getInstance("SHA1");
             mdTemp.update(str.getBytes("UTF-8"));

@@ -36,7 +36,7 @@ public class AdmRoleServiceImpl implements AdmRoleService {
 
         List<AdmRole> roleList = new ArrayList<>();
 
-        if (ListUtil.ListIsNull(list)){
+        if (ListUtil.ListIsNull(list)) {
             List<Integer> roleIds = list.stream().map(AdmUserRole::getRoleId).collect(Collectors.toList());
 
             roleList = selectByRoleIds(roleIds);
@@ -46,27 +46,27 @@ public class AdmRoleServiceImpl implements AdmRoleService {
     }
 
     @Override
-    public List<AdmRole> selectByRoleIds(List<Integer> roleIds){
+    public List<AdmRole> selectByRoleIds(List<Integer> roleIds) {
 
         List<AdmRole> backList = new ArrayList<>();
 
-        if (ListUtil.ListIsNull(roleIds)){
+        if (ListUtil.ListIsNull(roleIds)) {
             QueryWrapper<AdmRole> qw = new QueryWrapper<>();
-            qw.in("id",roleIds);
+            qw.in("id", roleIds);
             backList = admRoleMapper.selectList(qw);
 
             List<AdmRoleMenu> admRoleMenus = admRoleMenuService.selectByRoleIds(roleIds);
 
-            if (ListUtil.ListIsNull(admRoleMenus)){
+            if (ListUtil.ListIsNull(admRoleMenus)) {
                 List<Integer> menuIds = admRoleMenus.stream().map(AdmRoleMenu::getMenuId).distinct().collect(Collectors.toList());
 
                 List<AdmMenu> menus = admMenuService.selectMenuList(menuIds);
 
                 backList.forEach(
-                        s->{
+                        s -> {
                             List<Integer> myMenuIds = admRoleMenus.stream().filter(p -> p.getRoleId().equals(s.getId())).map(AdmRoleMenu::getMenuId).distinct().collect(Collectors.toList());
 
-                            s.setMenuList(menus.stream().filter(p->myMenuIds.contains(p.getId())).collect(Collectors.toList()));
+                            s.setMenuList(menus.stream().filter(p -> myMenuIds.contains(p.getId())).collect(Collectors.toList()));
                         }
                 );
             }

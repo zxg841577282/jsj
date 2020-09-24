@@ -6,6 +6,11 @@ import com.zxg.back.web.req.adm.AdmPageListIM;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -33,7 +38,6 @@ public class TestController {
     private SessionRegistry sessionRegistry;
 
 
-
     @PreAuthorize("hasAuthority('one')")
     @ApiOperation(value = "测试权限")
     @GetMapping("/testHasPermission")
@@ -48,7 +52,6 @@ public class TestController {
         return true;
     }
 
-
     @ApiOperation(value = "测试是否登陆")
     @GetMapping("/testLoginSuccess")
     public String testLoginSuccess() {
@@ -62,10 +65,17 @@ public class TestController {
         return JSON.toJSONString(allPrincipals);
     }
 
-
     @ApiOperation(value = "分页测试")
     @PostMapping("/testPageList")
-    public Object testPageList(@RequestBody AdmPageListIM im){
+    public Object testPageList(@RequestBody AdmPageListIM im) {
         return im.getPageList();
     }
+
+    @ApiOperation(value = "test")
+    @PostMapping("/test")
+    public Object test(Integer id) {
+        return admUserService.getById(id);
+    }
+
+
 }

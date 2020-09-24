@@ -24,7 +24,7 @@ public class AdmUserRoleServiceImpl implements AdmUserRoleService {
     public List<AdmUserRole> selectByUserId(Integer userId) {
 
         QueryWrapper<AdmUserRole> qw = new QueryWrapper<>();
-        qw.eq("user_id",userId);
+        qw.eq("user_id", userId);
 
         return admUserRoleMapper.selectList(qw);
     }

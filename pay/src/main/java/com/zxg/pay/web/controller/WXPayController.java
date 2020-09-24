@@ -41,8 +41,8 @@ public class WXPayController {
         String openId = "oHXtL5OeHTv_03G0t4891aR_Sn1I";
         String ip = "47.114.2.38";
 
-        JsApiPayIM im = new JsApiPayIM(APPID,MCHID,MCH_KEY,
-                orderNo,openId,totalFee,null,ip,null,null);
+        JsApiPayIM im = new JsApiPayIM(APPID, MCHID, MCH_KEY,
+                orderNo, openId, totalFee, null, ip, null, null);
         return wxJsApiPayService.payByJsApi(im);
     }
 
@@ -53,39 +53,39 @@ public class WXPayController {
         String openId = "oHXtL5OeHTv_03G0t4891aR_Sn1I";
         String ip = "47.114.2.38";
 
-        JsApiPayIM im = new JsApiPayIM(APPID,MCHID,MCH_KEY,
-                orderNo,openId,totalFee,null,ip,null,null);
+        JsApiPayIM im = new JsApiPayIM(APPID, MCHID, MCH_KEY,
+                orderNo, openId, totalFee, null, ip, null, null);
         return wxJsApiPayService.payByNative(im);
     }
 
     @ApiOperation(value = "查询订单")
     @GetMapping("/findOrder")
-    public JSONObject findOrder(String out_trade_no,String transaction_id) {
-        SelectOrderIM im = new SelectOrderIM(APPID,MCHID,MCH_KEY, out_trade_no,transaction_id);
+    public JSONObject findOrder(String out_trade_no, String transaction_id) {
+        SelectOrderIM im = new SelectOrderIM(APPID, MCHID, MCH_KEY, out_trade_no, transaction_id);
         return wxJsApiPayService.select(im);
     }
 
     @ApiOperation(value = "关闭订单")
     @PutMapping("/closeOrder")
     public JSONObject closeOrder(String out_trade_no) {
-        CloseOrderIM im = new CloseOrderIM(APPID,MCHID,MCH_KEY, out_trade_no);
+        CloseOrderIM im = new CloseOrderIM(APPID, MCHID, MCH_KEY, out_trade_no);
         return wxJsApiPayService.close(im);
     }
 
     @ApiOperation(value = "申请退款")
     @PostMapping("/refund")
-    public JSONObject refund(String out_trade_no,BigDecimal totalFee,BigDecimal refundFee) {
+    public JSONObject refund(String out_trade_no, BigDecimal totalFee, BigDecimal refundFee) {
         String out_refund_no = SnowFlake.getId();
 
-        RefundIM im = new RefundIM(APPID,MCHID,MCH_KEY,
-                out_trade_no,out_refund_no,totalFee,refundFee,null,null);
+        RefundIM im = new RefundIM(APPID, MCHID, MCH_KEY,
+                out_trade_no, out_refund_no, totalFee, refundFee, null, null);
         return wxJsApiPayService.refund(im);
     }
 
     @ApiOperation(value = "查询退款")
     @PostMapping("/selectRefund")
     public JSONObject selectRefund(String transaction_id, String out_trade_no, String out_refund_no, String refund_id) {
-        SelectRefundIM im = new SelectRefundIM(APPID,MCHID,MCH_KEY,transaction_id,out_trade_no,out_refund_no,refund_id);
+        SelectRefundIM im = new SelectRefundIM(APPID, MCHID, MCH_KEY, transaction_id, out_trade_no, out_refund_no, refund_id);
         return wxJsApiPayService.select_Refund(im);
     }
 

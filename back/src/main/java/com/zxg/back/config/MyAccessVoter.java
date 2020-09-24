@@ -38,6 +38,7 @@ public class MyAccessVoter implements AccessDecisionVoter<MethodInvocation> {
 
     /**
      * 本投票操作仅支持 PrePostEnabled
+     *
      * @param authentication
      * @param method
      * @param collection
@@ -48,7 +49,7 @@ public class MyAccessVoter implements AccessDecisionVoter<MethodInvocation> {
     public int vote(Authentication authentication, MethodInvocation method, Collection<ConfigAttribute> collection) {
 
         // 没有权限默认拒绝
-        if (authentication == null){
+        if (authentication == null) {
             return ACCESS_DENIED;
         }
 
@@ -61,7 +62,7 @@ public class MyAccessVoter implements AccessDecisionVoter<MethodInvocation> {
         //如果权限中有一条符合 默认超管配置的  直接返回成功
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority authority : authorities) {
-            if(authority.getAuthority().equals("zhou_xg")){
+            if (authority.getAuthority().equals("zhou_xg")) {
                 return ACCESS_GRANTED;
             }
         }
@@ -84,10 +85,10 @@ public class MyAccessVoter implements AccessDecisionVoter<MethodInvocation> {
                 return null;
             }
 
-            attribute = (ConfigAttribute)var2.next();
-        } while(!(attribute instanceof PreInvocationAttribute));
+            attribute = (ConfigAttribute) var2.next();
+        } while (!(attribute instanceof PreInvocationAttribute));
 
-        return (PreInvocationAttribute)attribute;
+        return (PreInvocationAttribute) attribute;
     }
 
 }

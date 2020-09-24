@@ -31,12 +31,12 @@ public class AdmMenuServiceImpl implements AdmMenuService {
 
         List<AdmMenu> menus = new ArrayList<>();
 
-        if (ListUtil.ListIsNull(roleIds)){
+        if (ListUtil.ListIsNull(roleIds)) {
             QueryWrapper<AdmRoleMenu> qw = new QueryWrapper<>();
-            qw.in("role_id",roleIds);
+            qw.in("role_id", roleIds);
             List<AdmRoleMenu> admRoleMenus = admRoleMenuMapper.selectList(qw);
 
-            if (ListUtil.ListIsNull(admRoleMenus)){
+            if (ListUtil.ListIsNull(admRoleMenus)) {
                 List<Integer> menuIdList = admRoleMenus.stream().map(AdmRoleMenu::getMenuId).distinct().collect(Collectors.toList());
 
                 menus = selectMenuList(menuIdList);
@@ -47,13 +47,13 @@ public class AdmMenuServiceImpl implements AdmMenuService {
     }
 
     @Override
-    public List<AdmMenu> selectMenuList(List<Integer> menuIds){
+    public List<AdmMenu> selectMenuList(List<Integer> menuIds) {
 
         List<AdmMenu> admMenus = new ArrayList<>();
 
-        if (ListUtil.ListIsNull(menuIds)){
+        if (ListUtil.ListIsNull(menuIds)) {
             QueryWrapper<AdmMenu> qw = new QueryWrapper<>();
-            qw.in("id",menuIds);
+            qw.in("id", menuIds);
             admMenus = admMenuMapper.selectList(qw);
         }
 

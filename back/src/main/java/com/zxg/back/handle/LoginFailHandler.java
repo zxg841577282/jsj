@@ -30,19 +30,19 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
-        logger.info("LoginFailHandler：{}",e.getMessage());
+        logger.info("LoginFailHandler：{}", e.getMessage());
 
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 
         HashMap<String, Object> resMap = new HashMap<>();
-        resMap.put("code",HttpStatus.UNAUTHORIZED.value());
+        resMap.put("code", HttpStatus.UNAUTHORIZED.value());
 
         String msg;
 
         if (e instanceof BadCredentialsException) {
             msg = "密码输入错误!";
-        }else if (e instanceof UsernameNotFoundException){
+        } else if (e instanceof UsernameNotFoundException) {
             msg = "账户名不存在";
         } else if (e instanceof LockedException) {
             msg = "账户被锁定，请联系管理员!";
@@ -55,7 +55,7 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
         } else {
             msg = "登录失败!";
         }
-        resMap.put("msg",msg);
+        resMap.put("msg", msg);
 
         response.getWriter().write(JSONObject.toJSONString(resMap));
         response.flushBuffer();

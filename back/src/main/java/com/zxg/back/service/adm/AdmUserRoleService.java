@@ -7,6 +7,7 @@ import java.util.List;
 public interface AdmUserRoleService {
     /**
      * 账户查询所属角色
+     *
      * @param userId 账户ID
      * @return
      */

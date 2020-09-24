@@ -21,6 +21,7 @@
         <module>back</module>
         <module>get_logistics</module>
         <module>pay</module>
+        <module>security</module>
     </modules>
 
     <properties>
@@ -102,6 +103,20 @@
             <artifactId>spring-boot-starter-aop</artifactId>
             <version>${spring-aop-version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.4.3</version>
+        </dependency>
+
+        <!--reflections-->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.12</version>
+        </dependency>
+
 
     </dependencies>
 

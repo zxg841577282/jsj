@@ -25,10 +25,10 @@ public class SelectRefundIM extends BaseWxInfoIM {
 
     public SelectRefundIM(String appid, String mch_id, String mchidKey, String transaction_id, String out_trade_no, String out_refund_no, String refund_id) {
         super(appid, mch_id, mchidKey);
-        AssertUtils.isListAllNull(Arrays.asList(transaction_id,out_trade_no,out_refund_no,refund_id),"四个单号必须有一个不为null");
-        this.transaction_id = (transaction_id==null?"":transaction_id);
-        this.out_trade_no = (out_trade_no==null?"":out_trade_no);
-        this.out_refund_no = (out_refund_no==null?"":out_refund_no);
-        this.refund_id = (refund_id==null?"":refund_id);
+        AssertUtils.isListAllNull(Arrays.asList(transaction_id, out_trade_no, out_refund_no, refund_id), "四个单号必须有一个不为null");
+        this.transaction_id = (transaction_id == null ? "" : transaction_id);
+        this.out_trade_no = (out_trade_no == null ? "" : out_trade_no);
+        this.out_refund_no = (out_refund_no == null ? "" : out_refund_no);
+        this.refund_id = (refund_id == null ? "" : refund_id);
     }
 }

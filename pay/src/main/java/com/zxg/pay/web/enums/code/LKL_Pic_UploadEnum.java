@@ -20,8 +20,7 @@ public enum LKL_Pic_UploadEnum {
     BUSINESS_LICENCE("BUSINESS_LICENCE", "营业执照"),
     PERSONAL_PHOTO("PERSONAL_PHOTO", "合影照片"),
     MERCHANT_PHOTO("MERCHANT_PHOTO", "商户照片"),
-    OTHERS("OTHERS", "其他")
-    ;
+    OTHERS("OTHERS", "其他");
 
     private String value;
     private String msg;
@@ -39,7 +38,7 @@ public enum LKL_Pic_UploadEnum {
         return msg;
     }
 
-    public static List getList(){
+    public static List getList() {
         List list = Lists.newArrayList();//Lists.newArrayList()其实和new ArrayList()几乎一模
 
         for (LKL_Pic_UploadEnum airlineTypeEnum : LKL_Pic_UploadEnum.values()) {

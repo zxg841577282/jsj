@@ -42,7 +42,7 @@ public class AdmUserServiceImpl implements AdmUserService {
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        if (ListUtil.ListIsNull(admRoles)){
+        if (ListUtil.ListIsNull(admRoles)) {
 
             for (AdmRole admRole : admRoles) {
                 for (AdmMenu menu : admRole.getMenuList()) {
@@ -54,11 +54,16 @@ public class AdmUserServiceImpl implements AdmUserService {
             }
         }
 
-        return new User(admUser.getUsername(),admUser.getPassword(),grantedAuthorities);
+        return new User(admUser.getUsername(), admUser.getPassword(), grantedAuthorities);
     }
 
     @Override
     public IPage<AdmUser> selectPageList(Page page) {
-        return admUserMapper.selectPage(page,null);
+        return admUserMapper.selectPage(page, null);
+    }
+
+    @Override
+    public AdmUser getById(Integer id) {
+        return admUserMapper.getById(id);
     }
 }

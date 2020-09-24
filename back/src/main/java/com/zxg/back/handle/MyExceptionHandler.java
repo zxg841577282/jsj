@@ -19,7 +19,7 @@ public class MyExceptionHandler {
 
 
     @ExceptionHandler(AccessDeniedException.class)
-    public R handleAccessDeniedException(AccessDeniedException e){
+    public R handleAccessDeniedException(AccessDeniedException e) {
         R r = new R();
         r.put("code", 403);
         r.put("msg", "暂无权限");
@@ -34,8 +34,8 @@ public class MyExceptionHandler {
     }
 
 
-    @ExceptionHandler( NullPointerException.class)
-    public R MethodNullPointerException( NullPointerException e) {
+    @ExceptionHandler(NullPointerException.class)
+    public R MethodNullPointerException(NullPointerException e) {
         logger.error(e.getMessage(), e);
         return R.error(404, "数据为空异常");
     }

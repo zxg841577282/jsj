@@ -7,12 +7,11 @@ package com.zxg.pay.web.enums.code;
  */
 
 public enum LKL_PayModeEnum {
-    WECHAT("微信","WECHAT"),
-    ALIPAY("支付宝","ALIPAY"),
-    UQRCODEPAY("银联","UQRCODEPAY "),
-    BESTPAY("翼支付","BESTPAY"),
-    SUNING("苏宁","SUNING")
-    ;
+    WECHAT("微信", "WECHAT"),
+    ALIPAY("支付宝", "ALIPAY"),
+    UQRCODEPAY("银联", "UQRCODEPAY "),
+    BESTPAY("翼支付", "BESTPAY"),
+    SUNING("苏宁", "SUNING");
 
     private String info;
 

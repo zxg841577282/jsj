@@ -40,7 +40,9 @@ public class DicRequestAli {
     private String ChildMerchantNo;//二级商户编号（大商户模式）
 
     public String getCommodityType() {
-        if (CommodityType == null){ throw new ResultException("商品种类不能为空");}
+        if (CommodityType == null) {
+            throw new ResultException("商品种类不能为空");
+        }
         return CommodityType;
     }
 
@@ -49,7 +51,9 @@ public class DicRequestAli {
     }
 
     public String getPaymentLinkType() {
-        if (PaymentLinkType == null){ throw new ResultException("交易渠道不能为空");}
+        if (PaymentLinkType == null) {
+            throw new ResultException("交易渠道不能为空");
+        }
         return PaymentLinkType;
     }
 
@@ -58,21 +62,25 @@ public class DicRequestAli {
     }
 
     public String getResultNotifyURL() {
-        if (ResultNotifyURL == null){throw new ResultException("通知 URL 地址不能为空");}
+        if (ResultNotifyURL == null) {
+            throw new ResultException("通知 URL 地址不能为空");
+        }
         return ResultNotifyURL;
     }
 
     public String getMerchantRemarks() {
-        return MerchantRemarks = MerchantRemarks==null?"":MerchantRemarks;
+        return MerchantRemarks = MerchantRemarks == null ? "" : MerchantRemarks;
     }
 
 
     public String getIsBreakAccount() {
-        if (IsBreakAccount == null){throw new ResultException("交易是否分账；是否支持向二级商户入账不能为空");}
+        if (IsBreakAccount == null) {
+            throw new ResultException("交易是否分账；是否支持向二级商户入账不能为空");
+        }
         return IsBreakAccount;
     }
 
     public String getChildMerchantNo() {
-        return ChildMerchantNo= ChildMerchantNo==null?"":ChildMerchantNo;
+        return ChildMerchantNo = ChildMerchantNo == null ? "" : ChildMerchantNo;
     }
 }

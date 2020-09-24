@@ -42,18 +42,18 @@ public class LklCodePayController {
         String orderNo = SnowFlake.getId();
         String shopName = "商户名称";
 
-        QR_ORDER_CREATE_IM im = new QR_ORDER_CREATE_IM(shopNo,termId,shopName,totalFee,orderNo);
+        QR_ORDER_CREATE_IM im = new QR_ORDER_CREATE_IM(shopNo, termId, shopName, totalFee, orderNo);
 
         return lklCodeService.QR_ORDER_CREATE(im);
     }
 
     @ApiOperation(value = "退款")
     @PutMapping("/refund")
-    public JSONObject refund(BigDecimal totalFee,String tradeNo,String lklOrderNo) {
+    public JSONObject refund(BigDecimal totalFee, String tradeNo, String lklOrderNo) {
         Date oriDate = new Date();
         String refundOrderId = SnowFlake.getId();
 
-        QR_REFUND_ORDER_IM im = new QR_REFUND_ORDER_IM(shopNo,termId,oriDate,totalFee,tradeNo,lklOrderNo,refundOrderId);
+        QR_REFUND_ORDER_IM im = new QR_REFUND_ORDER_IM(shopNo, termId, oriDate, totalFee, tradeNo, lklOrderNo, refundOrderId);
 
         return lklCodeService.QR_REFUND_ORDER(im);
     }
@@ -62,7 +62,7 @@ public class LklCodePayController {
     @GetMapping("/getRefund")
     public JSONObject getRefund(String refundTradeNo, String refundOrderId) {
 
-        return lklCodeService.QR_REFUND_QUERY_ORDER(refundTradeNo,refundOrderId);
+        return lklCodeService.QR_REFUND_QUERY_ORDER(refundTradeNo, refundOrderId);
     }
 
 

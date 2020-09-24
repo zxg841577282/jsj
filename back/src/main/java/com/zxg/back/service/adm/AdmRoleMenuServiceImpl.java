@@ -26,9 +26,9 @@ public class AdmRoleMenuServiceImpl implements AdmRoleMenuService {
 
         List<AdmRoleMenu> backList = new ArrayList<>();
 
-        if (ListUtil.ListIsNull(roleList)){
+        if (ListUtil.ListIsNull(roleList)) {
             QueryWrapper<AdmRoleMenu> qw = new QueryWrapper<>();
-            qw.in("role_id",roleList);
+            qw.in("role_id", roleList);
             backList = admRoleMenuMapper.selectList(qw);
         }
 

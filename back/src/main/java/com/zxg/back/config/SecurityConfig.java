@@ -33,12 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SessionRegistry sessionRegistry(){
+    public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
     }
 
@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 核心功能
      * 控制请求的拦截与开放
+     *
      * @param http
      * @throws Exception
      */
@@ -103,6 +104,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 指定认证对象的来源
+     *
      * @param auth
      * @throws Exception
      */
@@ -110,8 +112,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(admUserService).passwordEncoder(passwordEncoder());
     }
-
-
 
 
 }

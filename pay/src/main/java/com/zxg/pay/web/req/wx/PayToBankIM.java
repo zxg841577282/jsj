@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-public class PayToBankIM extends BaseWxInfoIM{
+public class PayToBankIM extends BaseWxInfoIM {
 
     @NotNull(message = "订单号不能为NULL")
     private String orderNo;
@@ -33,11 +33,11 @@ public class PayToBankIM extends BaseWxInfoIM{
     @NotNull(message = "银行卡所在开户行编号不能为NULL")
     private String bankCode;
 
-    public PayToBankIM(String appid, String mch_id, String mchidKey,  String orderNo, BigDecimal totalFee, String desc, String bankNo, String bankUser, String bankCode) {
+    public PayToBankIM(String appid, String mch_id, String mchidKey, String orderNo, BigDecimal totalFee, String desc, String bankNo, String bankUser, String bankCode) {
         super(appid, mch_id, mchidKey);
         this.orderNo = orderNo;
         this.totalFee = totalFee;
-        this.desc = (desc==null?"":desc);
+        this.desc = (desc == null ? "" : desc);
         this.bankNo = bankNo;
         this.bankUser = bankUser;
         this.bankCode = bankCode;

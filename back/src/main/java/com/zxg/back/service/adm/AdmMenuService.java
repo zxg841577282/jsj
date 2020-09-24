@@ -7,6 +7,7 @@ import java.util.List;
 public interface AdmMenuService {
     /**
      * 角色查所拥有权限
+     *
      * @param roleIds 角色ID集合
      * @return
      */
@@ -14,6 +15,7 @@ public interface AdmMenuService {
 
     /**
      * 权限ID获取列表
+     *
      * @param menuIds 权限ID集合
      * @return
      */

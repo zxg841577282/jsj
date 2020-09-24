@@ -75,17 +75,18 @@ public class DicOrderByWX {
 
     /**
      * 最基础构造方法
-     * @param orderNo 订单号
+     *
+     * @param orderNo     订单号
      * @param orderAmount 交易金额
-     * @param accountNo appid
-     * @param openID 用户openId
+     * @param accountNo   appid
+     * @param openID      用户openId
      */
     public DicOrderByWX(String orderNo, BigDecimal orderAmount, String accountNo, String openID) {
         PayTypeID = "JSAPI";
 
         //订单日期
         SimpleDateFormat ODSDF = new SimpleDateFormat("yyyy/MM/dd");
-        OrderDate =  ODSDF.format(new Date());
+        OrderDate = ODSDF.format(new Date());
 
         //订单时间
         SimpleDateFormat OTSDF = new SimpleDateFormat("HH:mm:ss");
@@ -111,13 +112,13 @@ public class DicOrderByWX {
      * 默认不支持借贷卡
      * 默认人民币
      * 默认不分期
-     * */
-    public DicOrderByWX(String payTypeID, String expiredDate, String orderNo, String orderAmount, String fee, String accountNo, String openID, String receiverAddress, String installmentCode, String installmentNum, String buyIP,  String orderDesc, String orderTimeoutDate, String limitPay) {
+     */
+    public DicOrderByWX(String payTypeID, String expiredDate, String orderNo, String orderAmount, String fee, String accountNo, String openID, String receiverAddress, String installmentCode, String installmentNum, String buyIP, String orderDesc, String orderTimeoutDate, String limitPay) {
         PayTypeID = payTypeID;
 
         //订单日期
         SimpleDateFormat ODSDF = new SimpleDateFormat("yyyy/MM/dd");
-        OrderDate =  ODSDF.format(new Date());
+        OrderDate = ODSDF.format(new Date());
 
         //订单时间
         SimpleDateFormat OTSDF = new SimpleDateFormat("HH:mm:ss");
@@ -134,20 +135,22 @@ public class DicOrderByWX {
         InstallmentCode = (AssertUtils.checkEmptyBack(installmentCode));
         InstallmentNum = (AssertUtils.checkEmptyBack(installmentNum));
         BuyIP = (AssertUtils.checkEmptyBack(buyIP));
-        OrderDesc = (AssertUtils.checkEmptyBack(orderDesc,"订单描述"));
+        OrderDesc = (AssertUtils.checkEmptyBack(orderDesc, "订单描述"));
         OrderTimeoutDate = (AssertUtils.checkEmptyBack(orderTimeoutDate));
-        LimitPay = (AssertUtils.checkEmptyBack(limitPay,"no_credit"));
+        LimitPay = (AssertUtils.checkEmptyBack(limitPay, "no_credit"));
     }
 
     public String getInstallmentCode() {
-        if (InstallmentMark.equals("1") && InstallmentCode==null){
-            throw new ResultException("当使用分期支付时,分期代码必须设定"); }
-        return InstallmentCode = InstallmentCode==null?"":InstallmentCode;
+        if (InstallmentMark.equals("1") && InstallmentCode == null) {
+            throw new ResultException("当使用分期支付时,分期代码必须设定");
+        }
+        return InstallmentCode = InstallmentCode == null ? "" : InstallmentCode;
     }
 
     public String getInstallmentNum() {
-        if (InstallmentMark.equals("1") && InstallmentNum==null){
-            throw new ResultException("当使用分期支付时,分期期数必须设定"); }
-        return InstallmentNum = InstallmentNum==null?"":InstallmentNum;
+        if (InstallmentMark.equals("1") && InstallmentNum == null) {
+            throw new ResultException("当使用分期支付时,分期期数必须设定");
+        }
+        return InstallmentNum = InstallmentNum == null ? "" : InstallmentNum;
     }
 }

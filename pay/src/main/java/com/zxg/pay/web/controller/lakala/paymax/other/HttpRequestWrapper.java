@@ -49,13 +49,13 @@ public class HttpRequestWrapper implements Request<HttpRequest> {
     }
 
     @Override
-    public String getRequestUriPath(){
+    public String getRequestUriPath() {
         URI uri = this.originalRequest.getURI();
         return StringUtils.isBlank(uri.getPath()) ? "" : uri.getPath();
     }
 
     @Override
-    public String getRequestQueryString(){
+    public String getRequestQueryString() {
         URI uri = this.originalRequest.getURI();
         return StringUtils.isBlank(uri.getQuery()) ? "" : uri.getQuery();
     }

@@ -7,9 +7,8 @@ package com.zxg.pay.web.enums.code;
  */
 
 public enum LKL_TransTypeEnum {
-    NATIVE("NATIVE","41"),
-    JSAPI("JSAPI","51")
-    ;
+    NATIVE("NATIVE", "41"),
+    JSAPI("JSAPI", "51");
 
     private String info;
 

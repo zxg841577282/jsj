@@ -48,7 +48,7 @@ public class ABCPayIM {
         SplitAmount = "";
     }
 
-    public ABCPayIM(DicOrder dicOrderIm, List<Orderitem> orderitemIm, DicRequest dicRequest,String splitMerchantID,String splitAmount) {
+    public ABCPayIM(DicOrder dicOrderIm, List<Orderitem> orderitemIm, DicRequest dicRequest, String splitMerchantID, String splitAmount) {
         this.dicOrderIm = dicOrderIm;
         this.orderitemIm = orderitemIm;
         this.dicRequest = dicRequest;

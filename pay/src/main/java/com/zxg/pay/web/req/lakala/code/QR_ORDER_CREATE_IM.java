@@ -27,35 +27,43 @@ public class QR_ORDER_CREATE_IM {
     private String description;//订单描述
 
     public String getShopNo() {
-        if (shopNo==null){throw new ResultException("扫码支付异常：商户号不能为空");}
+        if (shopNo == null) {
+            throw new ResultException("扫码支付异常：商户号不能为空");
+        }
         return shopNo;
     }
 
     public String getTermId() {
-        if (termId==null){throw new ResultException("扫码支付异常：终端号不能为空");}
+        if (termId == null) {
+            throw new ResultException("扫码支付异常：终端号不能为空");
+        }
         return termId;
     }
 
     public String getShopName() {
-        return shopName=shopName==null?"":shopName;
+        return shopName = shopName == null ? "" : shopName;
     }
 
     public BigDecimal getAmount() {
-        if (amount==null){throw new ResultException("扫码支付异常：订单金额不能为空");}
+        if (amount == null) {
+            throw new ResultException("扫码支付异常：订单金额不能为空");
+        }
         return amount;
     }
 
     public String getOrderId() {
-        if (orderId==null){throw new ResultException("扫码支付异常：订单号不能为空");}
+        if (orderId == null) {
+            throw new ResultException("扫码支付异常：订单号不能为空");
+        }
         return orderId;
     }
 
     public String getSubject() {
-        return subject=subject==null?"":subject;
+        return subject = subject == null ? "" : subject;
     }
 
     public String getDescription() {
-        return description=description==null?"":description;
+        return description = description == null ? "" : description;
     }
 
     public QR_ORDER_CREATE_IM(String shopNo, String termId, String shopName, BigDecimal amount, String orderId) {

@@ -34,17 +34,23 @@ public class GetInfoSingle {
     private String QueryDetail;//必需 是否查询详细信息
 
     public String getPayTypeID() {
-        if (PayTypeID == null){ throw new ResultException("交易类型不能为空");}
+        if (PayTypeID == null) {
+            throw new ResultException("交易类型不能为空");
+        }
         return PayTypeID;
     }
 
     public String getOrderNo() {
-        if (PayTypeID == null){ throw new ResultException("交易编号不能为空");}
+        if (PayTypeID == null) {
+            throw new ResultException("交易编号不能为空");
+        }
         return OrderNo;
     }
 
     public String getQueryDetail() {
-        if (PayTypeID == null){ throw new ResultException("是否查询详细信息不能为空");}
+        if (PayTypeID == null) {
+            throw new ResultException("是否查询详细信息不能为空");
+        }
         return QueryDetail;
     }
 }

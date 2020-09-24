@@ -70,14 +70,15 @@ public class DicOrder {
 
     /**
      * 最基础构造方法 直接支付 不分期 虚拟类商品
-     * @param orderNo 订单号
+     *
+     * @param orderNo     订单号
      * @param orderAmount 支付金额
      */
-    public DicOrder(String orderNo,BigDecimal orderAmount) {
+    public DicOrder(String orderNo, BigDecimal orderAmount) {
         PayTypeID = "ImmediatePay";
         //订单日期
         SimpleDateFormat ODSDF = new SimpleDateFormat("yyyy/MM/dd");
-        OrderDate =  ODSDF.format(new Date());
+        OrderDate = ODSDF.format(new Date());
 
         //订单时间
         SimpleDateFormat OTSDF = new SimpleDateFormat("HH:mm:ss");
@@ -100,17 +101,17 @@ public class DicOrder {
     }
 
 
-
-
     public String getInstallmentCode() {
-        if (InstallmentMark.equals("1") && InstallmentCode==null){
-            throw new ResultException("当使用分期支付时,分期代码必须设定"); }
-        return InstallmentCode = InstallmentCode==null?"":InstallmentCode;
+        if (InstallmentMark.equals("1") && InstallmentCode == null) {
+            throw new ResultException("当使用分期支付时,分期代码必须设定");
+        }
+        return InstallmentCode = InstallmentCode == null ? "" : InstallmentCode;
     }
 
     public String getInstallmentNum() {
-        if (InstallmentMark.equals("1") && InstallmentNum==null){
-            throw new ResultException("当使用分期支付时,分期期数必须设定"); }
-        return InstallmentNum = InstallmentNum==null?"":InstallmentNum;
+        if (InstallmentMark.equals("1") && InstallmentNum == null) {
+            throw new ResultException("当使用分期支付时,分期期数必须设定");
+        }
+        return InstallmentNum = InstallmentNum == null ? "" : InstallmentNum;
     }
 }

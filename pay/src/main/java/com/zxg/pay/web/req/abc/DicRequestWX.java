@@ -43,6 +43,7 @@ public class DicRequestWX {
 
     /**
      * 默认虚拟类商品网上交易
+     *
      * @param resultNotifyURL 回调通知地址
      */
     public DicRequestWX(String resultNotifyURL) {
@@ -57,7 +58,8 @@ public class DicRequestWX {
 
     /**
      * 自定义类型商品，网上交易
-     * @param commodityType  商品种类
+     *
+     * @param commodityType   商品种类
      * @param resultNotifyURL 回调通知地址
      * @param merchantRemarks 附言
      */

@@ -49,7 +49,7 @@ public class MercRegister {
     private String idCardExpire;//法人身份证有效期
     private String contactMobile;//联系人手机号码
 
-    private List<Map<String,String>> wechatFees = getWechat();
+    private List<Map<String, String>> wechatFees = getWechat();
 
     private String openningBankNo;//开户行号
     private String openningBankName;//开户支行名称
@@ -60,44 +60,44 @@ public class MercRegister {
     private String idCard;//入账人身份证号码
     private String settlePeriod = "T+1";//结算周期
     private String mccCode;//行业代码
-    private String debitRate="0.006";//借记卡手续费
+    private String debitRate = "0.006";//借记卡手续费
     private String termNum = "1";//终端数量
     private String retUrl = "http://mps.1card1.cn/notify/6001/lakalaAuditNotify";//通知地址
 
     private String MAC = getPin();
 
-    private static List<Map<String,String>> getWechat(){
-        List<Map<String,String>> wechatFees = new ArrayList<>();
+    private static List<Map<String, String>> getWechat() {
+        List<Map<String, String>> wechatFees = new ArrayList<>();
 
-        Map<String,String> map = new HashMap<>();
-        map.put("wechatType","WECHAT_PAY_FEE");
-        map.put("wechatRate","0.6");
+        Map<String, String> map = new HashMap<>();
+        map.put("wechatType", "WECHAT_PAY_FEE");
+        map.put("wechatRate", "0.6");
         wechatFees.add(map);
 
-        Map<String,String> map2 = new HashMap<>();
-        map2.put("wechatType","ALIPAY_WALLET_FEE");
-        map2.put("wechatRate","0.6");
+        Map<String, String> map2 = new HashMap<>();
+        map2.put("wechatType", "ALIPAY_WALLET_FEE");
+        map2.put("wechatRate", "0.6");
         wechatFees.add(map2);
 
-        Map<String,String> map3 = new HashMap<>();
-        map3.put("wechatType","UNIONPAY_WALLET_DEBIT_FEE");
-        map3.put("wechatRate","0.6");
+        Map<String, String> map3 = new HashMap<>();
+        map3.put("wechatType", "UNIONPAY_WALLET_DEBIT_FEE");
+        map3.put("wechatRate", "0.6");
         wechatFees.add(map3);
 
-        Map<String,String> map4 = new HashMap<>();
-        map4.put("wechatType","UNIONPAY_WALLET_CREDIT_FEE");
-        map4.put("wechatRate","0.6");
+        Map<String, String> map4 = new HashMap<>();
+        map4.put("wechatType", "UNIONPAY_WALLET_CREDIT_FEE");
+        map4.put("wechatRate", "0.6");
         wechatFees.add(map4);
 
-        Map<String,String> map5 = new HashMap<>();
-        map5.put("wechatType","BESTPAY_PURCHASE_FEE");
-        map5.put("wechatRate","0.6");
+        Map<String, String> map5 = new HashMap<>();
+        map5.put("wechatType", "BESTPAY_PURCHASE_FEE");
+        map5.put("wechatRate", "0.6");
         wechatFees.add(map5);
 
         return wechatFees;
     }
 
-    public String getPin(){
+    public String getPin() {
         return getCompOrgCode() + getChannelType() + getMerLicenseNo() + getProvinceCode() + getCityCode() + getCountyCode() + getCrLicenceNo()
                 + getContactMobile() + getOpenningBankNo() + getClearingBankNo() + getAccountNo() + getMccCode() + getTermNum() + MerchantBaseEnum.Sercret_Key.getValue();
     }

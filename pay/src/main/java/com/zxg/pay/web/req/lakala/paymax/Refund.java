@@ -21,7 +21,7 @@ public class Refund extends Paymax {
     //	退款订单id，系统内唯一，以“re_”开头，后跟24位随机数
     private String id;
     //	商户订单号，在商户系统内唯一，8-20位数字或字母，不允许特殊字符
-    @JSONField(name="order_no")
+    @JSONField(name = "order_no")
     private String orderNo;
     //	退款订单对应的支付订单id
     private String charge;
@@ -32,21 +32,21 @@ public class Refund extends Paymax {
     //退款备注，限制300个字符内
     private String description;
     //	支付渠道退款订单号
-    @JSONField(name="transaction_no")
+    @JSONField(name = "transaction_no")
     private String transactionNo;
     //用户自定义元数据
     private Map<String, Object> metadata;
     //订单创建时间，13位时间戳
-    @JSONField(name="time_created")
+    @JSONField(name = "time_created")
     private Long timeCreated;
     //	订单退款完成时间，13位时间戳
-    @JSONField(name="time_succeed")
+    @JSONField(name = "time_succeed")
     private Long timeSucceed;
     //订单的错误码
-    @JSONField(name="failure_code")
+    @JSONField(name = "failure_code")
     private String failureCode;
     //订单的错误消息的描述
-    @JSONField(name="failure_msg")
+    @JSONField(name = "failure_msg")
     private String failureMsg;
     //	订单状态，只有三种（PROCESSING-处理中，SUCCEED-成功，FAILED-失败）
     private String status;
@@ -54,22 +54,23 @@ public class Refund extends Paymax {
     private Boolean reqSuccessFlag;
 
 
-
     /**
      * 创建退款订单
+     *
      * @param chargeId
      * @param params
      */
-    public static Refund create(String chargeId,Map<String,Object> params) throws IOException {
-        return request(LklPaymaxConfig.API_BASE_URL+ LklPaymaxConfig.CREATE_CHARGE+"/"+chargeId+"/refunds", JSONObject.toJSONString(params),Refund.class);
+    public static Refund create(String chargeId, Map<String, Object> params) throws IOException {
+        return request(LklPaymaxConfig.API_BASE_URL + LklPaymaxConfig.CREATE_CHARGE + "/" + chargeId + "/refunds", JSONObject.toJSONString(params), Refund.class);
     }
 
     /**
      * 查询退款订单
+     *
      * @param chargeId
      * @param refundId
      */
-    public static Refund retrieve(String chargeId,String refundId) throws IOException {
-        return request(LklPaymaxConfig.API_BASE_URL+ LklPaymaxConfig.CREATE_CHARGE+"/"+chargeId+"/refunds/"+refundId, null,Refund.class);
+    public static Refund retrieve(String chargeId, String refundId) throws IOException {
+        return request(LklPaymaxConfig.API_BASE_URL + LklPaymaxConfig.CREATE_CHARGE + "/" + chargeId + "/refunds/" + refundId, null, Refund.class);
     }
 }

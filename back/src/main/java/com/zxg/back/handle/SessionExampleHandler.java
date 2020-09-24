@@ -26,7 +26,7 @@ public class SessionExampleHandler implements SessionInformationExpiredStrategy 
 
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException {
-        logger.warn("SessionExampleHandle:{}","你的账号在另一地点被登录");
+        logger.warn("SessionExampleHandle:{}", "你的账号在另一地点被登录");
 
         HttpServletResponse response = event.getResponse();
 
@@ -34,8 +34,8 @@ public class SessionExampleHandler implements SessionInformationExpiredStrategy 
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 
         HashMap<String, Object> resMap = new HashMap<>();
-        resMap.put("code",HttpStatus.UNAUTHORIZED.value());
-        resMap.put("msg","你的账号在另一地点被登录");
+        resMap.put("code", HttpStatus.UNAUTHORIZED.value());
+        resMap.put("msg", "你的账号在另一地点被登录");
 
         response.getWriter().write(JSONObject.toJSONString(resMap));
         response.flushBuffer();

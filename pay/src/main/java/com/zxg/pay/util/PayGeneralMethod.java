@@ -36,6 +36,7 @@ public class PayGeneralMethod {
     /**
      * 价格微信标准化
      * 乘以100
+     *
      * @param total_fee
      * @return
      */
@@ -126,12 +127,13 @@ public class PayGeneralMethod {
 
     /**
      * 获取加密结果
+     *
      * @param data 加密内容
      * @return 加密后的字符串
      */
-    public static String getDataWithPem(String data,String pemAddr) {
+    public static String getDataWithPem(String data, String pemAddr) {
         //获取pubkey字符串内容
-        String key=getPubKeyContentString(pemAddr);
+        String key = getPubKeyContentString(pemAddr);
 
         PublicKey publicKey = null;
         Cipher cipher = null;
@@ -156,6 +158,7 @@ public class PayGeneralMethod {
 
     /**
      * 根据公钥字符串获取公钥
+     *
      * @param key 公钥字符串
      * @return 返回公钥
      * @throws Exception
@@ -171,6 +174,7 @@ public class PayGeneralMethod {
 
     /**
      * 根据pem公钥路径获取公钥字符串
+     *
      * @return 公钥字符串
      */
     public static String getPubKeyContentString(String pemAddr) {
@@ -188,7 +192,7 @@ public class PayGeneralMethod {
                 publickey.append(line);
             }
             return publickey.toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

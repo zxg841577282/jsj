@@ -20,14 +20,14 @@ public class MyAuthExceptionEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        logger.warn("MyAuthExceptionEntryPoint:{}",authException.getMessage());
+        logger.warn("MyAuthExceptionEntryPoint:{}", authException.getMessage());
 
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 
         HashMap<String, Object> resMap = new HashMap<>();
-        resMap.put("code",HttpStatus.UNAUTHORIZED.value());
-        resMap.put("msg","未登录或token已失效");
+        resMap.put("code", HttpStatus.UNAUTHORIZED.value());
+        resMap.put("msg", "未登录或token已失效");
 
         response.getWriter().write(JSONObject.toJSONString(resMap));
         response.flushBuffer();

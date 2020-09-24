@@ -28,14 +28,14 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        logger.info("LoginSuccessHandler：{}","用户登陆成功");
+        logger.info("LoginSuccessHandler：{}", "用户登陆成功");
 
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 
         HashMap<String, Object> resMap = new HashMap<>();
-        resMap.put("code",HttpStatus.OK.value());
-        resMap.put("msg","登陆成功");
+        resMap.put("code", HttpStatus.OK.value());
+        resMap.put("msg", "登陆成功");
 
         response.getWriter().write(JSONObject.toJSONString(resMap));
         response.flushBuffer();

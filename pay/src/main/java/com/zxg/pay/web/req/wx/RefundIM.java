@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-public class RefundIM extends BaseWxInfoIM{
+public class RefundIM extends BaseWxInfoIM {
 
     @NotNull(message = "原系统订单号不能为NULL")
     private String out_trade_no;
@@ -37,13 +37,13 @@ public class RefundIM extends BaseWxInfoIM{
     //默认回调地址
     private static String defaultNotifyUrl = "http://jielong.siginfo.cn:8888/jielong/pay/asyncNoticeWxPay";
 
-    public RefundIM(String appid, String mch_id, String mchidKey, String out_trade_no, String out_refund_no, BigDecimal totalFee, BigDecimal refundFee,String refund_desc,String notify_url) {
+    public RefundIM(String appid, String mch_id, String mchidKey, String out_trade_no, String out_refund_no, BigDecimal totalFee, BigDecimal refundFee, String refund_desc, String notify_url) {
         super(appid, mch_id, mchidKey);
         this.out_trade_no = out_trade_no;
         this.out_refund_no = out_refund_no;
         this.totalFee = totalFee;
         this.refundFee = refundFee;
-        this.refund_desc = (refund_desc==null?"":refund_desc);
-        this.notify_url = (StringUtils.isEmpty(notify_url)?defaultNotifyUrl:notify_url);
+        this.refund_desc = (refund_desc == null ? "" : refund_desc);
+        this.notify_url = (StringUtils.isEmpty(notify_url) ? defaultNotifyUrl : notify_url);
     }
 }

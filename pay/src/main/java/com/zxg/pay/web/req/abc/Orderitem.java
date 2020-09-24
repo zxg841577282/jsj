@@ -31,7 +31,7 @@ public class Orderitem {
     private String ProductExpiredDate;//商品有效期
 
 
-    public Orderitem( String productName) {
+    public Orderitem(String productName) {
         ProductName = productName;
         SubMerName = "";
         SubMerId = "";

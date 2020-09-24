@@ -16,7 +16,7 @@ import java.util.Date;
  */
 @Getter
 @Setter
-public class JsApiPayIM extends BaseWxInfoIM{
+public class JsApiPayIM extends BaseWxInfoIM {
     //订单号
     @NotNull(message = "订单号不能为NULL")
     private String out_trade_no;
@@ -47,21 +47,21 @@ public class JsApiPayIM extends BaseWxInfoIM{
 
 
     public JsApiPayIM(String appid, String mch_id, String mchidKey, String out_trade_no, String openId, BigDecimal totalFee, String body, String ip, String notify_url, String time_expire) {
-        super(appid,mch_id,mchidKey);
+        super(appid, mch_id, mchidKey);
         this.out_trade_no = out_trade_no;
         this.openId = openId;
         this.totalFee = totalFee;
-        this.body = (StringUtils.isEmpty(body) ?"支付内容":body);
-        this.spbill_create_ip = (ip==null?"":ip);
+        this.body = (StringUtils.isEmpty(body) ? "支付内容" : body);
+        this.spbill_create_ip = (ip == null ? "" : ip);
 
         //回调地址为空则使用默认回调地址
-        this.notify_url = (StringUtils.isEmpty(notify_url)?defaultNotifyUrl:notify_url);
+        this.notify_url = (StringUtils.isEmpty(notify_url) ? defaultNotifyUrl : notify_url);
 
         //过期时间为空则默认30分钟
-        if (time_expire==null){
+        if (time_expire == null) {
             SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddHHmmss");
-            this.time_expire = ft.format(new Date().getTime()+30*1000*60);
-        }else {
+            this.time_expire = ft.format(new Date().getTime() + 30 * 1000 * 60);
+        } else {
             this.time_expire = time_expire;
         }
     }

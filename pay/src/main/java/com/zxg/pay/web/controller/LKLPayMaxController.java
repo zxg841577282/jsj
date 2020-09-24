@@ -36,7 +36,7 @@ public class LKLPayMaxController {
         String openId = "111111";
         String ip = "47.114.2.38";
 
-        CreateIM im = new CreateIM(totalFee,orderNo,openId,ip);
+        CreateIM im = new CreateIM(totalFee, orderNo, openId, ip);
         return payMaxService.charge(im);
     }
 

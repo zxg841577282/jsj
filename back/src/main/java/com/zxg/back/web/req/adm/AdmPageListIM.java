@@ -22,7 +22,7 @@ public class AdmPageListIM extends AbsWrapper<AdmUser> {
 
     @Override
     public void setWrap() {
-        like("username",username);
+        like("username", username);
     }
 
     @Override

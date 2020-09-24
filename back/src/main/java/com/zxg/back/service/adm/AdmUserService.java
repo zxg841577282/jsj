@@ -9,4 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface AdmUserService extends UserDetailsService {
 
     IPage<AdmUser> selectPageList(Page page);
+
+    AdmUser getById(Integer id);
 }

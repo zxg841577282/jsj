@@ -20,15 +20,15 @@ import java.io.IOException;
 
 public class HttpClientUtil {
 
-    public static String doPost(String url,String xml){
+    public static String doPost(String url, String xml) {
         try {
             CloseableHttpClient httpclient = HttpClients.createDefault();
 
             HttpPost httpPost = new HttpPost(url);
-            httpPost.addHeader("Content-Type","text/html;charset=GBK");
+            httpPost.addHeader("Content-Type", "text/html;charset=GBK");
 
             //解决中文乱码问题
-            StringEntity stringEntity = new StringEntity(xml,"GBK");
+            StringEntity stringEntity = new StringEntity(xml, "GBK");
             stringEntity.setContentEncoding("GBK");
 
             httpPost.setEntity(stringEntity);
@@ -43,7 +43,7 @@ public class HttpClientUtil {
                         HttpEntity entity = response.getEntity();
 
 
-                        return entity != null ? EntityUtils.toString(entity,"gbk") : null;
+                        return entity != null ? EntityUtils.toString(entity, "gbk") : null;
                     } else {
                         throw new ClientProtocolException(
                                 "Unexpected response status: " + status);
@@ -65,15 +65,15 @@ public class HttpClientUtil {
         }
     }
 
-    public static String doPostByPic(String url,String xml){
+    public static String doPostByPic(String url, String xml) {
         try {
             CloseableHttpClient httpclient = HttpClients.createDefault();
 
             HttpPost httpPost = new HttpPost(url);
-            httpPost.addHeader("Content-Type","multipart/form-data");
+            httpPost.addHeader("Content-Type", "multipart/form-data");
 
             //解决中文乱码问题
-            StringEntity stringEntity = new StringEntity(xml,"GBK");
+            StringEntity stringEntity = new StringEntity(xml, "GBK");
             stringEntity.setContentEncoding("GBK");
 
             httpPost.setEntity(stringEntity);
@@ -88,7 +88,7 @@ public class HttpClientUtil {
                         HttpEntity entity = response.getEntity();
 
 
-                        return entity != null ? EntityUtils.toString(entity,"GBK") : null;
+                        return entity != null ? EntityUtils.toString(entity, "GBK") : null;
                     } else {
                         throw new ClientProtocolException(
                                 "Unexpected response status: " + status);

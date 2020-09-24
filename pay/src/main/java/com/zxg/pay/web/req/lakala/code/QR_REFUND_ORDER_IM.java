@@ -38,7 +38,7 @@ public class QR_REFUND_ORDER_IM {
     @NotNull(message = "扫码退款异常：退款订单号不能为空")
     private String refundOrderId;//商户退款单号
 
-    public QR_REFUND_ORDER_IM(String shopNo,  String termId,  Date oriDate,  BigDecimal amount, String tradeNo, String lklOrderNo,  String refundOrderId) {
+    public QR_REFUND_ORDER_IM(String shopNo, String termId, Date oriDate, BigDecimal amount, String tradeNo, String lklOrderNo, String refundOrderId) {
         this.shopNo = shopNo;
         this.termId = termId;
         this.oriDate = oriDate;

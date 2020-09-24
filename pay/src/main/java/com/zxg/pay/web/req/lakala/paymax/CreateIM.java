@@ -46,7 +46,7 @@ public class CreateIM {
     private String return_url;
 
 
-    public CreateIM(BigDecimal amount,  String orderNo, String userId,String client_ip) {
+    public CreateIM(BigDecimal amount, String orderNo, String userId, String client_ip) {
         this.appKey = "app_7hqF2S6GYXET457i";
         this.amount = amount;
         this.subject = "商品标题";

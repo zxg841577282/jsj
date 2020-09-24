@@ -8,7 +8,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.jdbc.Driver # com.mysql.cj.jdbc.Driver（这个是mysql 8的版本）
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&autoReconnect=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/demo-security?useUnicode=true&autoReconnect=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=UTC
     username: root
     password: 123456
     hikari:

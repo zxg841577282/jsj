@@ -54,24 +54,26 @@ public class WxPayServiceImpl implements WxPayService {
 
     /**
      * JSAPI支付
+     *
      * @return
      */
-    public JSONObject payByJsApi(JsApiPayIM im){
-        return pay(im,true);
+    public JSONObject payByJsApi(JsApiPayIM im) {
+        return pay(im, true);
     }
 
     /**
      * Native支付
+     *
      * @return
      */
-    public JSONObject payByNative(JsApiPayIM im){
-        return pay(im,false);
+    public JSONObject payByNative(JsApiPayIM im) {
+        return pay(im, false);
     }
 
-    private JSONObject pay(JsApiPayIM im,boolean b){
+    private JSONObject pay(JsApiPayIM im, boolean b) {
         //参数校验
         ValidationUtil.ValidResult validResult = ValidationUtil.validateBean(im);
-        AssertUtils.check(!validResult.hasErrors(),validResult.getErrors());
+        AssertUtils.check(!validResult.hasErrors(), validResult.getErrors());
 
         Map<String, String> map = new HashMap<>();
 
@@ -84,7 +86,7 @@ public class WxPayServiceImpl implements WxPayService {
         map.put("total_fee", PayGeneralMethod.totalFeeWx(im.getTotalFee()));
         map.put("spbill_create_ip", im.getSpbill_create_ip());
         map.put("notify_url", im.getNotify_url());
-        map.put("trade_type", b?"JSAPI":"NATIVE");
+        map.put("trade_type", b ? "JSAPI" : "NATIVE");
         map.put("time_expire", im.getTime_expire());
         map.put("openid", im.getOpenId());
 
@@ -106,12 +108,13 @@ public class WxPayServiceImpl implements WxPayService {
 
     /**
      * 查询订单信息
+     *
      * @return
      */
-    public JSONObject select(SelectOrderIM im){
+    public JSONObject select(SelectOrderIM im) {
         //参数校验
         ValidationUtil.ValidResult validResult = ValidationUtil.validateBean(im);
-        AssertUtils.check(!validResult.hasErrors(),validResult.getErrors());
+        AssertUtils.check(!validResult.hasErrors(), validResult.getErrors());
 
         Map<String, String> map = new HashMap<>();
         map.put("appid", im.getAppid());
@@ -136,12 +139,13 @@ public class WxPayServiceImpl implements WxPayService {
 
     /**
      * 关闭订单
+     *
      * @return
      */
-    public JSONObject close(CloseOrderIM im){
+    public JSONObject close(CloseOrderIM im) {
         //参数校验
         ValidationUtil.ValidResult validResult = ValidationUtil.validateBean(im);
-        AssertUtils.check(!validResult.hasErrors(),validResult.getErrors());
+        AssertUtils.check(!validResult.hasErrors(), validResult.getErrors());
 
         Map<String, String> map = new HashMap<>();
         map.put("appid", im.getAppid());
@@ -166,12 +170,13 @@ public class WxPayServiceImpl implements WxPayService {
 
     /**
      * 退款
+     *
      * @return
      */
-    public JSONObject refund(RefundIM im){
+    public JSONObject refund(RefundIM im) {
         //参数校验
         ValidationUtil.ValidResult validResult = ValidationUtil.validateBean(im);
-        AssertUtils.check(!validResult.hasErrors(),validResult.getErrors());
+        AssertUtils.check(!validResult.hasErrors(), validResult.getErrors());
 
         Map<String, String> map = new HashMap<>();
         map.put("appid", im.getAppid());
@@ -194,13 +199,13 @@ public class WxPayServiceImpl implements WxPayService {
             System.out.println("微信退款订单请求参数：[" + xmlFromMap + "]");
 
             //访问链接
-            String s = HttpClientUtil.doWxPayPostCret( xmlFromMap,Refund_Url, cretAddr, im.getMch_id());
+            String s = HttpClientUtil.doWxPayPostCret(xmlFromMap, Refund_Url, cretAddr, im.getMch_id());
 
             JSONObject jsonObject = XmlJsonMapUtil.XmlToJSONObject(s);
             System.out.println("微信退款订单返回参数：[" + jsonObject + "]");
 
             return jsonObject;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new ResultException("申请退款未知异常");
         }
@@ -208,12 +213,13 @@ public class WxPayServiceImpl implements WxPayService {
 
     /**
      * 查询退款进度
+     *
      * @return
      */
-    public JSONObject select_Refund(SelectRefundIM im){
+    public JSONObject select_Refund(SelectRefundIM im) {
         //参数校验
         ValidationUtil.ValidResult validResult = ValidationUtil.validateBean(im);
-        AssertUtils.check(!validResult.hasErrors(),validResult.getErrors());
+        AssertUtils.check(!validResult.hasErrors(), validResult.getErrors());
 
         Map<String, String> map = new HashMap<>();
         map.put("appid", im.getAppid());
@@ -242,7 +248,7 @@ public class WxPayServiceImpl implements WxPayService {
     /**
      * 企业支付到零钱
      */
-    public JSONObject payToCash(PayToCashIM im){
+    public JSONObject payToCash(PayToCashIM im) {
         Map<String, String> map = new HashMap<>();
 
         map.put("mchid", im.getMch_id());
@@ -273,16 +279,16 @@ public class WxPayServiceImpl implements WxPayService {
     /**
      * 企业支付到银行卡
      */
-    public JSONObject payToBank(PayToBankIM im){
+    public JSONObject payToBank(PayToBankIM im) {
         Map<String, String> map = new HashMap<>();
 
         map.put("mch_id", im.getMch_id());
         map.put("partner_trade_no", im.getOrderNo());
         map.put("nonce_str", PayGeneralMethod.getStringRandom());
         try {
-            String bankNo2 = PayGeneralMethod.getDataWithPem(im.getBankNo(),pemAddr);
+            String bankNo2 = PayGeneralMethod.getDataWithPem(im.getBankNo(), pemAddr);
             map.put("enc_bank_no", bankNo2);
-            String bankUser2 = PayGeneralMethod.getDataWithPem(im.getBankUser(),pemAddr);
+            String bankUser2 = PayGeneralMethod.getDataWithPem(im.getBankUser(), pemAddr);
             map.put("enc_true_name", bankUser2);
         } catch (Exception e) {
             e.printStackTrace();

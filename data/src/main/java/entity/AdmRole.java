@@ -14,7 +14,7 @@ import java.util.List;
  * @Purpose:
  */
 @Data
-public class AdmRole  {
+public class AdmRole {
     @TableId
     private Integer id;
 

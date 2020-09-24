@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class},
-        scanBasePackages={
-                "com.zxg.pay","util","config","other"
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class},
+        scanBasePackages = {
+                "com.zxg.pay", "util", "config", "other"
         })
 public class PayApplication {
 

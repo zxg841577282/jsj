@@ -53,7 +53,7 @@ public class ABCPayController {
         DicRequestWX dicRequest = new DicRequestWX(resultNotifyURL);
 
         //构造请求参数
-        ABCWXPayIM im = new ABCWXPayIM(dicOrderIm,orderitemIm,dicRequest);
+        ABCWXPayIM im = new ABCWXPayIM(dicOrderIm, orderitemIm, dicRequest);
 
         return abcService.payByWx(im);
     }
@@ -77,29 +77,29 @@ public class ABCPayController {
         DicRequest dicRequest = new DicRequest(resultNotifyURL);
 
         //构造请求参数
-        ABCPayIM im = new ABCPayIM(dicOrder,orderitemIm,dicRequest);
+        ABCPayIM im = new ABCPayIM(dicOrder, orderitemIm, dicRequest);
 
         return abcService.payByABC(im);
     }
 
     @ApiOperation(value = "农业订单单笔查询")
     @PostMapping("/getABCOrder")
-    public JSONObject getABCOrder(String orderNo,Boolean type){
-        GetInfoSingle im = new GetInfoSingle("ImmediatePay",orderNo,type?"1":"0");
+    public JSONObject getABCOrder(String orderNo, Boolean type) {
+        GetInfoSingle im = new GetInfoSingle("ImmediatePay", orderNo, type ? "1" : "0");
 
         return abcService.getABCOrder(im);
     }
 
     @ApiOperation(value = "农业订单单笔退款")
     @PostMapping("/refundSingle")
-    public JSONObject refundSingle(){
+    public JSONObject refundSingle() {
         String orderDate = "";
         String orderTime = "";
         String orderNo = "";
         String newOrderNo = "";
         String trxAmount = "";
 
-        RefundSingle refundSingle = new RefundSingle(orderDate,orderTime,orderNo,newOrderNo,trxAmount);
+        RefundSingle refundSingle = new RefundSingle(orderDate, orderTime, orderNo, newOrderNo, trxAmount);
 
         RefundSingleIM im = new RefundSingleIM(refundSingle);
 

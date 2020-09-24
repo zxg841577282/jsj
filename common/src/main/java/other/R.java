@@ -53,8 +53,7 @@ public class R extends HashMap<String, Object> {
 		return new R();
 	}
 
-	public R put(String key, Object value) {
-		super.put(key, value);
-		return this;
+	public static <T> R status(boolean flag) {
+		return flag ? ok("操作成功") : error("操作失败");
 	}
 }

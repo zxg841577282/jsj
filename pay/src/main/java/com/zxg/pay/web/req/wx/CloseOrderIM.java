@@ -10,7 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class CloseOrderIM extends BaseWxInfoIM{
+public class CloseOrderIM extends BaseWxInfoIM {
 
     //系统订单号
     private String out_trade_no;

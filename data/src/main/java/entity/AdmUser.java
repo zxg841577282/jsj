@@ -9,6 +9,7 @@ import mapper.AdmUserMapper;
 import other.AbsWrapper;
 import util.SpringApplicationUtils;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class AdmUser{
+public class AdmUser implements Serializable {
     @TableId
     private Integer id;
 

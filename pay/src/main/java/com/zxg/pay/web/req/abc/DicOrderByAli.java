@@ -76,101 +76,121 @@ public class DicOrderByAli {
 
     //设定订单保存时间
     public String getExpiredDate() {
-        return ExpiredDate = ExpiredDate==null?"":ExpiredDate;
+        return ExpiredDate = ExpiredDate == null ? "" : ExpiredDate;
     }
+
     //当交易币种为空时，默认使用人民币
     public String getCurrencyCode() {
-        return CurrencyCode = CurrencyCode==null?"156":CurrencyCode;
+        return CurrencyCode = CurrencyCode == null ? "156" : CurrencyCode;
     }
 
     public String getOrderNo() {
-        return OrderNo = OrderNo==null? "订单单号":OrderNo;
+        return OrderNo = OrderNo == null ? "订单单号" : OrderNo;
     }
 
     public String getFee() {
-        return Fee = Fee==null?"":Fee;
+        return Fee = Fee == null ? "" : Fee;
     }
 
     public String getAccountNo() {
-        if (PayTypeID.equals("ALI_CREATE") && AccountNo==null){ throw new ResultException("交易类型为“线下静态一码多付”时必输，输入客户的支付宝 userid"); }
-        if (PayTypeID.equals("ALI_PAY") && AccountNo==null){ throw new ResultException("输入客户支付宝的授权码 auth_code"); }
+        if (PayTypeID.equals("ALI_CREATE") && AccountNo == null) {
+            throw new ResultException("交易类型为“线下静态一码多付”时必输，输入客户的支付宝 userid");
+        }
+        if (PayTypeID.equals("ALI_PAY") && AccountNo == null) {
+            throw new ResultException("输入客户支付宝的授权码 auth_code");
+        }
 
-        return AccountNo = AccountNo==null?"":AccountNo;
+        return AccountNo = AccountNo == null ? "" : AccountNo;
     }
 
     public String getReceiverAddress() {
-        return ReceiverAddress = ReceiverAddress==null?"":ReceiverAddress;
+        return ReceiverAddress = ReceiverAddress == null ? "" : ReceiverAddress;
     }
 
     public String getInstallmentCode() {
-        if (InstallmentMark.equals("1") && InstallmentCode==null){
-            throw new ResultException("当使用分期支付时,分期代码必须设定"); }
-        return InstallmentCode = InstallmentCode==null?"":InstallmentCode;
+        if (InstallmentMark.equals("1") && InstallmentCode == null) {
+            throw new ResultException("当使用分期支付时,分期代码必须设定");
+        }
+        return InstallmentCode = InstallmentCode == null ? "" : InstallmentCode;
     }
 
     public String getInstallmentNum() {
-        if (InstallmentMark.equals("1") && InstallmentNum==null){
-            throw new ResultException("当使用分期支付时,分期期数必须设定"); }
-        return InstallmentNum = InstallmentNum==null?"":InstallmentNum;
+        if (InstallmentMark.equals("1") && InstallmentNum == null) {
+            throw new ResultException("当使用分期支付时,分期期数必须设定");
+        }
+        return InstallmentNum = InstallmentNum == null ? "" : InstallmentNum;
     }
 
     public String getBuyIP() {
-        return BuyIP = BuyIP==null?"":BuyIP;
+        return BuyIP = BuyIP == null ? "" : BuyIP;
     }
 
     public String getOrderTimeoutDate() {
-        return orderTimeoutDate = orderTimeoutDate==null?"":orderTimeoutDate;
+        return orderTimeoutDate = orderTimeoutDate == null ? "" : orderTimeoutDate;
     }
 
 
     public String getPayTypeID() {
-        if (PayTypeID == null){ throw new ResultException("交易类型类型不能为空");}
+        if (PayTypeID == null) {
+            throw new ResultException("交易类型类型不能为空");
+        }
         return PayTypeID;
     }
 
     public String getOrderDesc() {
-        if (OrderDesc == null){ throw new ResultException("订单说明不能为空");}
+        if (OrderDesc == null) {
+            throw new ResultException("订单说明不能为空");
+        }
         return OrderDesc;
     }
 
     public String getInstallmentMark() {
-        if (InstallmentMark == null){ throw new ResultException("是否分期标识不能为空");}
+        if (InstallmentMark == null) {
+            throw new ResultException("是否分期标识不能为空");
+        }
         return InstallmentMark;
     }
 
     public String getOrderAmount() {
-        if (OrderAmount == null){ throw new ResultException("交易金额不能为空");}
+        if (OrderAmount == null) {
+            throw new ResultException("交易金额不能为空");
+        }
         return OrderAmount;
     }
 
     //默认不支持借贷卡
     public String getLimitPay() {
-        return LimitPay = LimitPay==null?"no_credit":LimitPay;
+        return LimitPay = LimitPay == null ? "no_credit" : LimitPay;
     }
 
     public String getPAYED_RETURN_URL() {
-        return PAYED_RETURN_URL = PAYED_RETURN_URL==null?"":PAYED_RETURN_URL;
+        return PAYED_RETURN_URL = PAYED_RETURN_URL == null ? "" : PAYED_RETURN_URL;
     }
 
     public String getWapQuitUrl() {
-        return WapQuitUrl = WapQuitUrl==null?"":WapQuitUrl;
+        return WapQuitUrl = WapQuitUrl == null ? "" : WapQuitUrl;
     }
 
     public String getPcQrPayMode() {
-        if (PayTypeID.equals("ALI_PC") && PcQrPayMode==null){throw new ResultException("PC 网站支付时必输PC 扫码支付方式");}
-        return PcQrPayMode=PcQrPayMode==null?"":PcQrPayMode;
+        if (PayTypeID.equals("ALI_PC") && PcQrPayMode == null) {
+            throw new ResultException("PC 网站支付时必输PC 扫码支付方式");
+        }
+        return PcQrPayMode = PcQrPayMode == null ? "" : PcQrPayMode;
     }
 
     public String getPcQrCodeWidth() {
-        if (PcQrPayMode.equals("4") && PcQrCodeWidth==null){throw new ResultException("PC 扫码支付方式为 4 时必输自定义二维码宽度");}
-        return PcQrCodeWidth=PcQrCodeWidth==null?"":PcQrCodeWidth;
+        if (PcQrPayMode.equals("4") && PcQrCodeWidth == null) {
+            throw new ResultException("PC 扫码支付方式为 4 时必输自定义二维码宽度");
+        }
+        return PcQrCodeWidth = PcQrCodeWidth == null ? "" : PcQrCodeWidth;
     }
+
     //默认有效时间15分钟
     public String getTimeoutExpress() {
-        return TimeoutExpress= TimeoutExpress==null?"15m":TimeoutExpress;
+        return TimeoutExpress = TimeoutExpress == null ? "15m" : TimeoutExpress;
     }
 
     public String getChildMerchantNo() {
-        return ChildMerchantNo = ChildMerchantNo==null?"":ChildMerchantNo;
+        return ChildMerchantNo = ChildMerchantNo == null ? "" : ChildMerchantNo;
     }
 }

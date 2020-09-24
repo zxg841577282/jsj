@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-public class PayToCashIM extends BaseWxInfoIM{
+public class PayToCashIM extends BaseWxInfoIM {
 
     @NotNull(message = "订单号不能为NULL")
     private String partner_trade_no;
@@ -33,7 +33,7 @@ public class PayToCashIM extends BaseWxInfoIM{
         this.partner_trade_no = partner_trade_no;
         this.openid = openid;
         this.amount = amount;
-        this.desc = (desc==null?"备注信息":desc);
-        this.spbill_create_ip = spbill_create_ip==null?"":spbill_create_ip;
+        this.desc = (desc == null ? "备注信息" : desc);
+        this.spbill_create_ip = spbill_create_ip == null ? "" : spbill_create_ip;
     }
 }

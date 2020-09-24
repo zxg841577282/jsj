@@ -71,8 +71,9 @@ public class DicRequest {
     }
 
     public String getUnionPayLinkType() {
-        if (PaymentType.equals("6") && PaymentLinkType.equals("2") && UnionPayLinkType == null){
-            throw new ResultException("是如果选择的支付帐户类型为 6(银联跨行支付)交易渠道为 2(手机网络接入)交易渠道时，不能为空");}
-        return UnionPayLinkType = UnionPayLinkType==null?"":UnionPayLinkType;
+        if (PaymentType.equals("6") && PaymentLinkType.equals("2") && UnionPayLinkType == null) {
+            throw new ResultException("是如果选择的支付帐户类型为 6(银联跨行支付)交易渠道为 2(手机网络接入)交易渠道时，不能为空");
+        }
+        return UnionPayLinkType = UnionPayLinkType == null ? "" : UnionPayLinkType;
     }
 }

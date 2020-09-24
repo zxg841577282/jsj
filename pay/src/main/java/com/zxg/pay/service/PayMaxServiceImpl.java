@@ -32,25 +32,25 @@ public class PayMaxServiceImpl implements PayMaxService {
         chargeMap.put("channel", "lakala_web_fast");
         chargeMap.put("client_ip", im.getClient_ip());
         chargeMap.put("app", im.getAppKey());
-        chargeMap.put("currency","CNY");
-        chargeMap.put("description",im.getDescription());
+        chargeMap.put("currency", "CNY");
+        chargeMap.put("description", im.getDescription());
         //请根据渠道要求确定是否需要传递extra字段
         Map<String, Object> extra = new HashMap<String, Object>();
-        extra.put("user_id",im.getUserId());
-        extra.put("return_url",im.getReturn_url());
-        chargeMap.put("extra",extra);
+        extra.put("user_id", im.getUserId());
+        extra.put("return_url", im.getReturn_url());
+        chargeMap.put("extra", extra);
         try {
             Charge charge = Charge.create(chargeMap);
 
-            if (charge.getReqSuccessFlag()){//http请求成功
+            if (charge.getReqSuccessFlag()) {//http请求成功
                 Map<String, Object> credential = charge.getCredential();
                 return (String) credential.get("lakala_web_fast");
-            }else {//http请求失败
+            } else {//http请求失败
                 System.out.println(JSON.toJSONString(charge));
                 String failureCode = charge.getFailureCode();
                 String failureMsg = charge.getFailureMsg();
-                System.out.println("failureCode:"+failureCode);
-                System.out.println("failureMsg:"+failureMsg);
+                System.out.println("failureCode:" + failureCode);
+                System.out.println("failureMsg:" + failureMsg);
                 return null;
             }
         } catch (Exception e) {
@@ -67,15 +67,15 @@ public class PayMaxServiceImpl implements PayMaxService {
         try {
             Charge charge = Charge.retrieve(orderId);
 
-            if (charge.getReqSuccessFlag()){//http请求成功
+            if (charge.getReqSuccessFlag()) {//http请求成功
                 Map<String, Object> credential = charge.getCredential();
-                return (JSONObject)credential.get("alipay_app");
-            }else {//http请求失败
+                return (JSONObject) credential.get("alipay_app");
+            } else {//http请求失败
                 System.out.println(JSON.toJSONString(charge));
                 String failureCode = charge.getFailureCode();
                 String failureMsg = charge.getFailureMsg();
-                System.out.println("failureCode:"+failureCode);
-                System.out.println("failureMsg:"+failureMsg);
+                System.out.println("failureCode:" + failureCode);
+                System.out.println("failureMsg:" + failureMsg);
                 return null;
             }
         } catch (Exception e) {

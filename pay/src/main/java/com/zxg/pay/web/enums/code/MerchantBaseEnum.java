@@ -13,10 +13,9 @@ public enum MerchantBaseEnum {
     Sercret_Key("4ZBu7cGBDhggQ3f9S1puCUNiLXGLcvqb", "Sercret_Key"),
     Url("https://test.wsmsd.cn/thirdpartplatform/merchmanage/6001.dor", "请求外网地址"),
     PicUrl("http://180.167.225.200:8661/UploadAttachment", "进件附件上传地址"),
-    returnUrl("http://gc.chinazzw.com:8080/ht/mem/user/QRCodeRegisterBack","回调地址"),
-    compOrgCode("GJEO","SIPS机构代码"),
-    bmcpOrgCode("230280","MCP机构代码")
-    ;
+    returnUrl("http://gc.chinazzw.com:8080/ht/mem/user/QRCodeRegisterBack", "回调地址"),
+    compOrgCode("GJEO", "SIPS机构代码"),
+    bmcpOrgCode("230280", "MCP机构代码");
 
 
     private String value;
