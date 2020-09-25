@@ -3,14 +3,10 @@ package other;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import other.R;
-import other.ResultException;
-
 /**
  * 异常处理器
  * 
@@ -47,11 +43,11 @@ public class MyExceptionHandler {
 		return R.error(404, e.getBindingResult().getFieldError().getDefaultMessage());
 	}
 
-	@ExceptionHandler(AccessDeniedException.class)
-	public R MethodAccessDeniedException(AccessDeniedException e) {
-		logger.error(e.getMessage(), e);
-		return R.error(404, "暂无权限,不允许访问");
-	}
+//	@ExceptionHandler(AccessDeniedException.class)
+//	public R MethodAccessDeniedException(AccessDeniedException e) {
+//		logger.error(e.getMessage(), e);
+//		return R.error(404, "暂无权限,不允许访问");
+//	}
 
 	@ExceptionHandler(DuplicateKeyException.class)
 	public R handleDuplicateKeyException(DuplicateKeyException e){

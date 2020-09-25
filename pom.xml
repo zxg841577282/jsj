@@ -20,6 +20,7 @@
         <module>common</module>
         <module>get_logistics</module>
         <module>pay</module>
+        <module>office</module>
         <module>security</module>
     </modules>
 
@@ -82,12 +83,6 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger-version}</version>
-        </dependency>
-
-        <!--spring security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <dependency>
