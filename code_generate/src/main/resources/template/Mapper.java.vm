@@ -1,21 +1,12 @@
-package ${package}.${moduleName}.mapper;
+package ${package}.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Component;
-import ${package}.${moduleName}.entity.${className};
+import ${package}.entity.${className};
 
 /**
- * <p>
- * ${comments}
- * </p>
- *
- * @package:  ${package}.${moduleName}.mapper
- * @description: ${comments}
  * @author: ${author}
  * @date: Created in ${datetime}
- * @copyright: Copyright (c) ${year}
- * @version: V1.0
- * @modified: ${author}
  */
 @Component
 public interface ${className}Mapper extends BaseMapper<${className}> {

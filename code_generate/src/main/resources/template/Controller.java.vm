@@ -1,11 +1,11 @@
-package ${package}.${moduleName}.controller;
+package ${package}.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xkcoding.common.R;
 import com.xkcoding.scaffold.log.annotations.ApiLog;
-import ${package}.${moduleName}.entity.${className};
-import ${package}.${moduleName}.service.${className}Service;
+import ${package}.entity.${className};
+import ${package}.service.${className}Service;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
@@ -14,17 +14,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 
 /**
- * <p>
- * ${comments}
- * </p>
- *
- * @package:  ${package}.${moduleName}.controller
- * @description: ${comments}
  * @author: ${author}
  * @date: Created in ${datetime}
- * @copyright: Copyright (c) ${year}
- * @version: V1.0
- * @modified: ${author}
  */
 @RestController
 @AllArgsConstructor
