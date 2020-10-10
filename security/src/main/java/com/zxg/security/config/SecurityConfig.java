@@ -115,6 +115,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**",
                         "/v2/api-docs"
                 )
+                .mvcMatchers("/api/test/**")
         ;
     }
 

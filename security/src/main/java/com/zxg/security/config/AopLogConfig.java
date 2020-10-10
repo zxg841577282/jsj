@@ -109,8 +109,8 @@ public class AopLogConfig {
             log.info("【返回值】：{}", JSON.toJSONString(result));
             return result;
         }catch (ResultException e){
-            log.error(e.getMessage());
-            return R.error(e.getMessage());
+            log.error(e.getErrMessage());
+            return R.error(e.getErrMessage());
         }
     }
 

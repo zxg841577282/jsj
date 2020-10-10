@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import other.R;
+import other.ResultException;
 
 /**
  * @Author: zhou_xg
@@ -17,6 +18,18 @@ import other.R;
 public class MyExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(MyExceptionHandler.class);
 
+    /**MethodArgumentTypeMismatchException
+	 * 处理自定义异常
+	 */
+	@ExceptionHandler(ResultException.class)
+	public R handleRRException(ResultException e){
+		R r = new R();
+		r.put("code", e.getCode());
+		r.put("msg", e.getErrMessage());
+
+		//需记录日志
+		return r;
+	}
 
     @ExceptionHandler(AccessDeniedException.class)
     public R handleAccessDeniedException(AccessDeniedException e){
