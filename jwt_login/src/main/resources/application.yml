@@ -1,0 +1,54 @@
+server:
+  port: 7778
+
+# 应用名称
+spring:
+  application:
+    name: jwt_login
+  cache:
+    type: redis
+    datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      hikari:
+        minimum-idle: 5
+        idle-timeout: 600000 #空闲连接存活最大时间，默认600000
+        maximum-pool-size: 30
+        auto-commit: true #此属性控制从池返回的连接的默认自动提交行为,默认值：true
+        pool-name: DemoQuartzHikariCP
+        max-lifetime: 900000 # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+        connection-timeout: 30000 #数据库连接超时时间,默认30秒，即30000
+        connection-test-query: SELECT 1
+  datasource:
+    #JDBC基本配置
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+# mybatis
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  global-config:
+    # 关闭MP3.0自带的banner
+    banner: false
+    db-config:
+      #主键类型  0:"数据库ID自增", 1:"不操作", 2:"用户输入ID",3:"数字型snowflake", 4:"全局唯一ID UUID", 5:"字符串型snowflake";
+      id-type: AUTO
+      #字段策略
+      insert-strategy: not_null
+      update-strategy: not_null
+      select-strategy: not_null
+      #驼峰下划线转换
+      table-underline: true
+      # 逻辑删除配置
+      # 逻辑删除全局值（1表示已删除，这也是Mybatis Plus的默认配置）
+      logic-delete-value: 1
+      # 逻辑未删除全局值（0表示未删除，这也是Mybatis Plus的默认配置）
+      logic-not-delete-value: 0
+  configuration:
+    #驼峰
+    map-underscore-to-camel-case: true
+    #打开二级缓存
+    cache-enabled: true
+
