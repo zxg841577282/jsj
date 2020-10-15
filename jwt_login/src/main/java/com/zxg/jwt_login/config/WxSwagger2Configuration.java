@@ -1,5 +1,6 @@
 package com.zxg.jwt_login.config;
 
+import com.zxg.jwt_login.common.handler.LoginUserHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -46,10 +47,8 @@ public class WxSwagger2Configuration {
 
     private ApiInfo wxApiInfo() {
         return new ApiInfoBuilder()
-                .title("litemall-wx API")
-                .description("litemall小商场API")
-                .termsOfServiceUrl("https://github.com/linlinjava/litemall")
-                .contact("https://github.com/linlinjava/litemall")
+                .title("jwt_login")
+                .description("jwt_login")
                 .version("1.0")
                 .build()
                 ;
@@ -57,7 +56,7 @@ public class WxSwagger2Configuration {
 
     private List<ApiKey> security() {
         return newArrayList(
-                new ApiKey("Authorization", "X-Litemall-Token", "header")
+                new ApiKey("Authorization", LoginUserHandler.LOGIN_TOKEN_KEY, "header")
         );
     }
 

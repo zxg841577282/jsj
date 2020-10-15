@@ -17,7 +17,7 @@ public class JwtUtil {
     /**
      * JWT时间默认盐值 666666
      */
-    private String calendarSalt = "SALT-JSJ";
+    public static String calendarSalt = "SALT-JSJ";
     /**
      * JWT时间默认单位 分钟
      */
