@@ -6,10 +6,15 @@ import javax.annotation.PostConstruct;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Executors;
 
+/**
+ * 延迟任务service
+ */
+
 @Component
 public class TaskService {
     private TaskService taskService;
-    private DelayQueue<MyTask> delayQueue =  new DelayQueue<MyTask>();
+
+    private final DelayQueue<Task> delayQueue =  new DelayQueue<>();
 
     @PostConstruct
     private void init() {
@@ -22,8 +27,7 @@ public class TaskService {
             public void run() {
                 while (true) {
                     try {
-                        MyTask task = delayQueue.take();
-                        task.run();
+                        delayQueue.take().run();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -32,15 +36,67 @@ public class TaskService {
         });
     }
 
-    public void addTask(MyTask task){
+    /**
+     * 新增延迟任务
+     *
+     * add 与 offer 比较
+     * 前者插入队列尾部,若队列已满,则抛出IllegalStateException 异常
+     * 后者插入队列尾部,若队列已满,则返回false
+     * put 方法 等待队列可用后插入尾部
+     */
+    public boolean addTask(Task task){
         if(delayQueue.contains(task)){
-            return;
+            System.out.println("延迟队列中已存在相同任务");
+            return false;
         }
-        delayQueue.add(task);
+        System.out.println("新增前延迟队列数量："+ delayQueue.size());
+
+        System.out.println("创建新队列："+ task.getName());
+
+        boolean offer = delayQueue.offer(task);
+
+        System.out.println("新增后延迟队列数量："+ delayQueue.size());
+
+        return offer;
+
     }
 
-    public void removeTask(MyTask task){
-        delayQueue.remove(task);
+    /**
+     * 删除延迟任务
+     */
+    public boolean removeTask(Task task){
+        if(delayQueue.contains(task)){
+            System.out.println("延迟队列中不存在对应任务");
+            return false;
+        }
+
+        System.out.println("删除前延迟队列数量："+delayQueue.size());
+
+        System.out.println("删除队列："+ task.getName());
+
+        boolean remove = delayQueue.remove(task);
+
+        System.out.println("删除后延迟队列数量："+delayQueue.size());
+
+        return remove;
+    }
+
+    /**
+     * 清空延迟任务
+     */
+    public void clear(){
+        System.out.println("清空前延迟队列数量："+delayQueue.size());
+
+        delayQueue.clear();
+
+        System.out.println("清空后延迟队列数量："+delayQueue.size());
+    }
+
+    /**
+     * 返回队列中所有元素的数组
+     */
+    public Object[] toArray(){
+        return delayQueue.toArray();
     }
 
 }

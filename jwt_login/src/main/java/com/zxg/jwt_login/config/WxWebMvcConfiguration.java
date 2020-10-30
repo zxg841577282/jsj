@@ -56,8 +56,8 @@ public class WxWebMvcConfiguration implements WebMvcConfigurer{
                         "/swagger-resources/**",
                         "/webjars/**",
                         "/v2/api-docs",
-                        "/login",
-                        "/test"
+                        "/auth/login",
+                        "/myTask1/**"
                 )
                 ;
     }
