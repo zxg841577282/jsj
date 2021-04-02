@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import other.R;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 
