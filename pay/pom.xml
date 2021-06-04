@@ -11,7 +11,7 @@
     <name>pay</name>
 
     <properties>
-        <http-client.version>4.5.10</http-client.version>
+        <http-client.version>4.5.13</http-client.version>
         <dom4j.version>1.6.1</dom4j.version>
         <httpcore.version>4.4.13</httpcore.version>
         <ali-pay.version>4.9.124.ALL</ali-pay.version>
